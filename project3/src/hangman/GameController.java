@@ -208,7 +208,7 @@ public class GameController {
 
 			case 1:
 				Circle c = new Circle();
-				c.relocate(250, 100);
+				c.relocate(500, 100);
 				c.setRadius(25);
 				board.getChildren().add(c);
 				updateTries(5);
@@ -222,7 +222,7 @@ public class GameController {
 				line.setEndY(100.0f);
 				line.setStrokeWidth(5);
 				line.setStroke(Color.BLUE);
-				line.relocate(248, 110);
+				line.relocate(499, 110);
 				board.getChildren().add(line);
 				updateTries(4);
 				break;
@@ -235,7 +235,7 @@ public class GameController {
 				line2.setEndY(0.0f);
 				line2.setStrokeWidth(5);
 				line2.setStroke(Color.RED);
-				line2.relocate(248, 135);
+				line2.relocate(500, 135);
 				board.getChildren().add(line2);
 				updateTries(3);
 				break;
@@ -248,7 +248,7 @@ public class GameController {
 				line3.setEndY(0.0f);
 				line3.setStrokeWidth(5);
 				line3.setStroke(Color.GREEN);
-				line3.relocate(210, 135);
+				line3.relocate(460, 135);
 				board.getChildren().add(line3);
 				updateTries(2);
 				break;
@@ -261,7 +261,7 @@ public class GameController {
 				line4.setEndY(20.0f);
 				line4.setStrokeWidth(5);
 				line4.setStroke(Color.PINK);
-				line4.relocate(248, 210);
+				line4.relocate(500, 210);
 				board.getChildren().add(line4);
 				updateTries(1);
 				break;
@@ -274,7 +274,7 @@ public class GameController {
 				line5.setEndY(0.0f);
 				line5.setStrokeWidth(5);
 				line5.setStroke(Color.ORANGE);
-				line5.relocate(228, 210);
+				line5.relocate(475, 210);
 				board.getChildren().add(line5);
 				updateTries(0);
 				break;

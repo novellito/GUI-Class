@@ -6,7 +6,8 @@
 .hangman-board {
 	-fx-background-color: white ;
 	-fx-padding: 15px ;
-	-fx-alignment: top-center ;
+	-fx-alignment: center;
+
 }
 
 .numTries { // CT
