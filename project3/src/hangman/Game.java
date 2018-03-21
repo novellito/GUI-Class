@@ -27,7 +27,7 @@ public class Game {
 	private File dictionary_file;
 	public int moves;
 	private int index;
-	private boolean resetGame = false;
+	private boolean containsDash = true;
 	private ReadOnlyObjectWrapper<GameStatus> gameStatus;
 	private ObjectProperty<Boolean> gameState = new ReadOnlyObjectWrapper<Boolean>();
 
@@ -110,10 +110,7 @@ public class Game {
 					return GameStatus.OPEN;
 				}
 				//GN - show new game on screen when resetting
-                if(resetGame){
-                    resetGame = false;
-                    return GameStatus.OPEN;
-                }
+
 				else {
 					if(index == -2) { // CT
 						return GameStatus.DUPLICATE;
@@ -158,7 +155,15 @@ public class Game {
 			final long randomLocation = (long) (Math.random() * dictionary_scanner.length());
 			dictionary_scanner.seek(randomLocation);
 			dictionary_scanner.readLine();
-			answer = dictionary_scanner.readLine();
+			// Remove the dashes from the word
+			while(containsDash) {
+				answer = dictionary_scanner.readLine().toLowerCase();
+				if(answer.contains("-")){
+					containsDash = true;
+				}
+				else
+					containsDash = false;
+			}
 			System.out.print(answer);
 		}catch(FileNotFoundException fnf){
 			System.out.println("The file you specified was not found");
@@ -219,13 +224,14 @@ public class Game {
 
 	//GN - Resetting the game
 	public void reset() {
-	    resetGame = true;
+		containsDash = true;
+		moves = 0;
 		setRandomWord();
 		prepTmpAnswer();
 		prepLetterAndPosArray();
-		moves = 0;
 		gameState.setValue(false); // initial state
 		createGameStatusBinding();
+		//gameState.setValue(!gameState.getValue());
 	}
 
 	private int numOfTries() {
