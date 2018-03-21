@@ -293,9 +293,9 @@ public class GameController {
 	// GN - Resetting game controller when player clicks hangman in Action Bar
 	private void newHangman() {
 		game.reset();
+		dynamicString = ALPHABET;
 		setMysteryWordLetters();
 		drawHangman(7);
-		dynamicString = ALPHABET;
 		setUpStatusLabelBindings();
 		setAlphabet();
 		textField.setVisible(true);
