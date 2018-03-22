@@ -226,6 +226,7 @@ public class Game {
 	public void reset() {
 		containsDash = true;
 		moves = 0;
+		index = 0;
 		setRandomWord();
 		prepTmpAnswer();
 		prepLetterAndPosArray();
