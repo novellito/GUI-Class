@@ -10,7 +10,7 @@
 
 }
 
-.numTries { // CT
+.numTries { /** CT **/
 	-fx-background-color: orange ;
 	-fx-padding: 15px ;
 	-fx-alignment: center ;
@@ -25,7 +25,7 @@
 	-fx-alignment: center;
 }
 
-.letter-status { //CT
+.letter-status { /** CT **/
 	-fx-background-color: lightblue ;
 	-fx-padding: 25px ;
 	-fx-alignment: center;

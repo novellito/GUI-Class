@@ -112,6 +112,7 @@ public class GameController {
 		Text changedString = new Text(sb.toString().replace("", "  ").trim()); // update the mystery word & add space in between
 		mysteryWord = sb.toString();
 		game.tmpAnswer = mysteryWord;
+		System.out.println("game. tmp "+game.tmpAnswer);
 		letterStatus.getChildren().add(changedString);
 	}
 
@@ -310,9 +311,9 @@ public class GameController {
 	public void onEnter(ActionEvent ae){ // CT - created initial onEnter listener
 
 		if(!checkDuplicateEntry(textField.getText())) {
-			game.makeMove(textField.getText());
 			drawHangman(game.moves);
 			updateMysteryWord(textField.getText()); //CT
+			game.makeMove(textField.getText());
 			changeAlphabet(textField.getText()); // A.K. - remove the char after its been entered
 			checkGameStatus(); // A.K. - disable text box if win or lose
 		}

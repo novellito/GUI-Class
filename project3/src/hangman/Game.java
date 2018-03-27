@@ -210,7 +210,7 @@ public class Game {
 			StringBuilder sb = new StringBuilder(tmpAnswer);
 			sb.setCharAt(index, input.charAt(0));
 			tmpAnswer = sb.toString();
-			System.out.println(tmpAnswer);
+			System.out.println("tmp " + tmpAnswer);
 		}
 		return index;
 	}
