@@ -152,7 +152,7 @@ public class Game {
 		try {
 			dictionary_file = new File("src/dictionary/dictionary_full.txt");
 			dictionary_scanner = new RandomAccessFile(dictionary_file, "r");
-			final long randomLocation = (long) (Math.random() * dictionary_scanner.length());
+			final long randomLocation = (long) (Math.random() * dictionary_scanner.length()-1);
 			dictionary_scanner.seek(randomLocation);
 			dictionary_scanner.readLine();
 			// Remove the dashes from the word
@@ -164,7 +164,7 @@ public class Game {
 				else
 					containsDash = false;
 			}
-			System.out.print(answer);
+			System.out.println(answer);
 		}catch(FileNotFoundException fnf){
 			System.out.println("The file you specified was not found");
 		}catch(IOException ioe){
