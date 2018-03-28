@@ -311,9 +311,10 @@ public class GameController {
 	public void onEnter(ActionEvent ae){ // CT - created initial onEnter listener
 
 		if(!checkDuplicateEntry(textField.getText())) {
-			drawHangman(game.moves);
 			updateMysteryWord(textField.getText()); //CT
 			game.makeMove(textField.getText());
+			drawHangman(game.moves);
+
 			changeAlphabet(textField.getText()); // A.K. - remove the char after its been entered
 			checkGameStatus(); // A.K. - disable text box if win or lose
 		}
