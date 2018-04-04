@@ -62,12 +62,12 @@
             host     : 'localhost',
             user     : 'root',
             password : '',
-            database : 'Proj2'
+            database : 'fblite'
         });
         
         connection.connect();
         
-        let query = 'SELECT * FROM students';
+        let query = 'SELECT * FROM users';
         connection.query(query, function (error, results, fields) {
         if (error) throw error;
         console.log(results);
