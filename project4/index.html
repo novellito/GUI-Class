@@ -42,11 +42,43 @@
             </span>
           </nav>
         </div>
-        <div class="pane">hello</div>
+        <div class="pane">
+          <div id="userDetails">
+            <h2>User Details</h2>
+            <br>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <script>
+    /***** Basic front-end to display user info. *****/
+    
+    /***** Database Connection *****/
+    var userDetails = document.getElementById('userDetails');
+        var mysql = require('mysql');
+        var connection = mysql.createConnection({
+            host     : 'localhost',
+            user     : 'root',
+            password : '',
+            database : 'Proj2'
+        });
+        
+        connection.connect();
+        
+        let query = 'SELECT * FROM students';
+        connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        console.log(results);
+        for(let i = 0; i<results.length; i++) {
+            userDetails.innerHTML += `<p><strong>Name:</strong> ${results[i].name}, <strong>Age:</strong> ${results[i].age}</p>`;
+        }
+
+        });
+        
+        connection.end();
+  </script>
   <script>
     // You can also require other files to run in this process
     require('./renderer.js')

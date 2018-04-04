@@ -13,5 +13,8 @@
   "author": "Christian T, Arminder K, George N, Rene G",
   "devDependencies": {
     "electron": "^1.8.4"
+  },
+  "dependencies": {
+    "mysql": "^2.15.0"
   }
 }
