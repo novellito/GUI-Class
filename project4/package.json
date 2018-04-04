@@ -1,0 +1,17 @@
+{
+  "name": "fb-lite",
+  "version": "1.0.0",
+  "description": "A simple app for our GUI class",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/novellito/GUI-Class",
+  "keywords": [
+    "Electron"
+  ],
+  "author": "Christian T, Arminder K, George N, Rene G",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  }
+}
