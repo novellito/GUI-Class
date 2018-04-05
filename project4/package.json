@@ -1,20 +1,42 @@
 {
-  "name": "fb-lite",
-  "version": "1.0.0",
-  "description": "A simple app for our GUI class",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/novellito/GUI-Class",
-  "keywords": [
-    "Electron"
-  ],
-  "author": "Christian T, Arminder K, George N, Rene G",
+  "name": "electron-with-create-react-app",
+  "version": "0.1.0",
+  "description": "Electron app powered by CRA",
+  "author": "OSS Community",
+  "private": true,
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron": "^1.4.15",
+    "electron-builder": "^13.6.0",
+    "foreman": "^2.0.0",
+    "react-scripts": "^0.9.0"
   },
   "dependencies": {
-    "mysql": "^2.15.0"
+    "electron-is-dev": "^0.3.0",
+    "photonkit": "^0.1.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "homepage": "./",
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "dev": "nf start -p 3000",
+    "pack": "build --dir",
+    "electron-dev": "set ELECTRON_START_URL=http:/localhost:3000 && electron .",
+    "dist": "npm run build && build",
+    "postinstall": "install-app-deps"
+  },
+  "build": {
+    "appId": "com.electron.electron-with-create-react-app",
+    "win": {
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+    },
+    "directories": {
+      "buildResources": "public"
+    }
   }
 }
