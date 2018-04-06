@@ -1,0 +1,35 @@
+.face {
+    margin-top: 20px;
+    font-size: 8em;
+}
+
+.user-details {
+    text-align: center;
+}
+
+.username {
+    font-size: 30px;
+    margin: 0;
+}
+
+.age {
+    font-size: 20px;
+    margin: 0;
+}
+
+.friend-options {
+    position: relative;
+    margin-left: 10%;
+
+}
+
+.del-btn {
+    margin-right: 20px;
+}
+
+.del,
+.add {
+    margin-top: 5px;
+    color: white;
+}
+

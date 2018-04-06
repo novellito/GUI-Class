@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "electron-is-dev": "^0.3.0",
+    "material-ui": "^0.20.0",
     "photonkit": "^0.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"

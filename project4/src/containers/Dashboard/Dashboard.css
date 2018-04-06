@@ -1,0 +1,18 @@
+.face {
+    margin-top: 20px;
+    font-size: 8em;
+}
+
+.user-details {
+    text-align: center;
+}
+
+.username {
+    font-size: 30px;
+    margin: 0;
+}
+
+.age {
+    font-size: 20px;
+    margin: 0;
+}
