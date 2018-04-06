@@ -15,41 +15,31 @@ class Friends extends Component {
         return (
 
             <Drawer openSecondary={true} open={this.props.active}>
-            <List>
-                <Subheader>Friends</Subheader>
-                <ListItem
-                    primaryText="Brendan Lim"
-                    leftIcon={< Person />}
-                    rightIconButton={
-                    <IconButton
-                    iconStyle={{cursor:"pointer"}}
-                        tooltip="Remove Friend"
-                        tooltipPosition="top-left">
-                        <Close/>
-                    </IconButton>}/>
-                <ListItem
-                    primaryText="Brendan Lim"
-                    leftIcon={< Person />}
-                    rightIconButton={
+            <div className="list">
+                <List>
+                    <Subheader>Friends</Subheader>
+                    <ListItem
+                        primaryText="Brendan Lim"
+                        leftIcon={< Person />}
+                        rightIconButton={
                         <IconButton
                         iconStyle={{cursor:"pointer"}}
-                        tooltip="Remove Friend"
-                        tooltipPosition="top-left">
-                        <Close/>
-                    </IconButton>}/>
-                
-                <ListItem
-                    primaryText="Brendan Lim"
-                    leftIcon={< Person />}
-                    rightIconButton={
-                        <IconButton
-                        iconStyle={{cursor:"pointer"}}
-                        tooltip="Remove Friend"
-                        tooltipPosition="top-left">
-                        <Close/>
-                    </IconButton>}/>
-             
-            </List>
+                            tooltip="Remove Friend"
+                            tooltipPosition="top-left">
+                            <Close/>
+                        </IconButton>}/>
+                    <ListItem
+                        primaryText="Brendan Lim"
+                        leftIcon={< Person />}
+                        rightIconButton={
+                            <IconButton
+                            iconStyle={{cursor:"pointer"}}
+                            tooltip="Remove Friend"
+                            tooltipPosition="top-left">
+                            <Close/>
+                        </IconButton>}/>
+                </List>
+            </div>
 
             <Divider/>
 
