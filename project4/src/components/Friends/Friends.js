@@ -11,6 +11,18 @@ import './Friends.css';
 
 
 class Friends extends Component {
+    constructor() {
+        super();
+        this.state = {
+            friends: []
+        }    
+    }
+
+    componentDidMount() {
+        fetch('/friends')
+            .then(res => res.json())
+            .then(friends => this.setState({ friends }, () => console.log("Friends received..", friends)));
+    }
     render(props) {
         return (
 
@@ -18,8 +30,9 @@ class Friends extends Component {
             <div className="list">
                 <List>
                     <Subheader>Friends</Subheader>
-                    <ListItem
-                        primaryText="Brendan Lim"
+                    {this.state.friends.map(friend =>
+                    <ListItem key={friend.id}
+                        primaryText={<span>{friend.fname} {friend.lname}</span>}
                         leftIcon={< Person />}
                         rightIconButton={
                         <IconButton
@@ -28,16 +41,7 @@ class Friends extends Component {
                             tooltipPosition="top-left">
                             <Close/>
                         </IconButton>}/>
-                    <ListItem
-                        primaryText="Brendan Lim"
-                        leftIcon={< Person />}
-                        rightIconButton={
-                            <IconButton
-                            iconStyle={{cursor:"pointer"}}
-                            tooltip="Remove Friend"
-                            tooltipPosition="top-left">
-                            <Close/>
-                        </IconButton>}/>
+                    )}
                 </List>
             </div>
 
