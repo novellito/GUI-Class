@@ -17,7 +17,8 @@
     "mysql": "^2.15.0",
     "photonkit": "^0.1.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router-dom": "^4.2.2"
   },
   "homepage": "./",
   "main": "src/electron-starter.js",
