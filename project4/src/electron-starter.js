@@ -13,7 +13,7 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 910, height: 550, resizable:false});
+    mainWindow = new BrowserWindow({width: 910, height: 550, resizable:false, icon: path.join(__dirname, '/public/facebook.png')});
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
