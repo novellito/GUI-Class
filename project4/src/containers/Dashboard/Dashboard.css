@@ -16,3 +16,13 @@
     font-size: 20px;
     margin: 0;
 }
+
+.status {
+    position: absolute;
+    margin: 50px auto 35px auto;
+    left: 40%;
+}
+
+.statusText {
+    margin-right: 20px;
+}

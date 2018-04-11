@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Drawer from 'material-ui/Drawer';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import './Dashboard.css'
 import Friends from '../../components/Friends/Friends'
 
@@ -25,7 +27,6 @@ class Dashboard extends Component {
             <div className="window">
                 <div className="window-content">
                     <div className="pane-group">
-                        <div className="">
                             <Drawer className="pane-mini sidebar user-detail" open={true}>
                                 <div className="user-details">
                                     <i className="material-icons face">face</i>
@@ -35,9 +36,18 @@ class Dashboard extends Component {
                                 <button onClick={this.handleToggle}>
                                     test</button>
                             </Drawer>
+                            
+                            <div className="status">
+                                <TextField className="statusText" hintText="Update Status"/>
+                                <RaisedButton label="Primary" primary={true} />
+                            </div>
+                            
+                            <div className="addPost">
+                                <textarea></textarea>
+                            </div>
+
+                            
                             <Friends active={this.state.active}/>
-                        </div>
-                       
                     </div>
                 </div>
 
