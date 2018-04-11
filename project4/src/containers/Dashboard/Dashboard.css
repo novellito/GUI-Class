@@ -19,10 +19,26 @@
 
 .status {
     position: absolute;
-    margin: 50px auto 35px auto;
+    margin-top: 50px;
     left: 40%;
 }
 
 .statusText {
     margin-right: 20px;
+}
+
+.addPost {
+    position: absolute;
+    margin-top: 100px;
+    left: 40%;
+}
+
+.post {
+    margin-right: 20px;
+} 
+
+.listPosts {
+    position: absolute;
+    margin-top: 250px;
+    left: 40%;
 }

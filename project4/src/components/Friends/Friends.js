@@ -58,8 +58,6 @@ class Friends extends Component {
             </div>
         </Drawer>
 
-
-
         );
     }
 }

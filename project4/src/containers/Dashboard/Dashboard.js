@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import './Dashboard.css'
 import Friends from '../../components/Friends/Friends'
+import Posts from '../../components/Posts/Posts'
 
 class Dashboard extends Component {
 
@@ -36,19 +37,31 @@ class Dashboard extends Component {
                                 <button onClick={this.handleToggle}>
                                     test</button>
                             </Drawer>
-                            
+
                             <div className="status">
                                 <TextField className="statusText" hintText="Update Status"/>
                                 <RaisedButton label="Primary" primary={true} />
                             </div>
-                            
+
                             <div className="addPost">
-                                <textarea></textarea>
+                                <h3>Add a Post</h3>
+                                <TextField
+                                    className="post"
+                                    hintText="Add post"
+                                    multiLine={true}
+                                    rows={1}
+                                    rowsMax={4}
+                                />
+                                <RaisedButton label="Primary" primary={true} />
                             </div>
 
-                            
+                            <div className="listPosts">
+                                <Posts />
+                            </div>
+
                             <Friends active={this.state.active}/>
                     </div>
+                
                 </div>
 
             </div>

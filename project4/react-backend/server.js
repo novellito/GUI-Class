@@ -26,6 +26,21 @@ app.get('/friends', function(req, res) {
     });
 });
 
+// Get Posts Listing
+app.get('/posts', function(req, res) {
+    let userID = '123456';
+    let postQuery = `SELECT * FROM posts WHERE user_id=${userID}`;
+
+    let posts = [];
+    connection.query(postQuery, function(error, results, fields) {
+        if (error) throw error;
+        for(post in results) {
+            posts.push(results[post]);
+        }
+        res.json(posts);
+    });
+});
+
 const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
