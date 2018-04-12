@@ -9,7 +9,7 @@ import AddFriends from './AddFriends/AddFriends';
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Search from 'material-ui/svg-icons/action/search';
-
+import FriendPreview from '../FriendPreview/FriendPreview';
 
 import './Friends.css';
 
@@ -20,8 +20,9 @@ class Friends extends Component {
         this.state = {
             addingAFriend:false,
             deletingAFriend:false,
+            viewingUser:false,
+            userLookupID:'',
             friends: []
-            
         }    
     }
 
@@ -29,9 +30,13 @@ class Friends extends Component {
         this.setState({addingAFriend:!this.state.addingAFriend});
     }
 
+    // toggles the delete icon for the friends list
     toggleDeletingFriend = () => {
         this.setState({deletingAFriend:!this.state.deletingAFriend,addingAFriend:false});
     }
+
+    // Method to update the database when a friend has been deleted
+    // Also visually updates the user's friends list
     deleteFriend(friendId,id) {
         let dataID = null;
         friendId? dataID=friendId: dataID=id;
@@ -50,28 +55,33 @@ class Friends extends Component {
         }).then(res => res.json()).then(res=>console.log(res))
     }
 
-   
+    // Visually adds a friend to the user's friends list
     addToList = (f) => {
-        console.log(f)
         this.setState({friend:this.state.friends.push(f)})
     }
 
+    //Method to store the information of the user being previewed
+    lookupUser = (id) => {
+        this.setState({viewingUser: !this.state.viewingUser, userLookupID:id});
+    }
+
+    // Load the current users friends list
     componentDidMount() {
         fetch(`/friendsList/${this.props.userID}`)
             .then(res => res.json())
             .then(friends => this.setState({ friends }, () => console.log("Friends received..", friends)));
     }
+    
     render(props) {
 
         let addingFriend = null;
         if(this.state.addingAFriend) {
             addingFriend = <AddFriends  onFriendAdded={this.addToList} userID={this.props.userID}/>
         }
-        return (
 
+        return (
             <Drawer openSecondary={true} open={this.props.active}>
             <div className="list">
-
             {addingFriend}
                 <List>
                     <Subheader>Friends</Subheader>
@@ -84,29 +94,26 @@ class Friends extends Component {
                         iconStyle={{cursor:"pointer"}}
                             tooltip={this.state.deletingAFriend?  "Remove Friend" : "View Profile"}
                             tooltipPosition="top-left">
-                            {this.state.deletingAFriend?  <Close onClick={()=>this.deleteFriend(friend.friend_id,friend.id)}/> : <Search/>}
+                            {this.state.deletingAFriend?  <Close onClick={()=>this.deleteFriend(friend.friend_id,friend.id)}/> : <Search onClick={()=>this.lookupUser(friend.friend_id)}/>}
                         </IconButton>}/>
                     )}
                 </List>
             </div>
 
+            {this.state.viewingUser? <FriendPreview lookUpID={this.state.userLookupID} onClose={this.lookupUser} />: ''}
+                
             <Divider/>
-
             <div className="friend-options">
                 <RaisedButton onClick={this.toggleDeletingFriend} backgroundColor="#FF1744" className="del-btn" >
                     <i className="material-icons del">delete</i>
                     <span>/</span>
                     <i className="material-icons ser">search</i>
                 </RaisedButton>
-
                 <RaisedButton onClick={this.addingFriend} backgroundColor="#00E676">
                     <i className="material-icons add">add</i>
                 </RaisedButton>
             </div>
         </Drawer>
-
-
-
         );
     }
 }

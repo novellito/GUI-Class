@@ -18,20 +18,13 @@ class Dashboard extends Component {
         });
     };
 
-    close = () => {
-        console.log('closing');
-    }
-
+    // method to fetch the current users information so that it can be used later
     componentWillMount() {
-      
         fetch(`/userInfo/${this.props.match.params.id}`)
         .then(res => res.json())
         .then(userInfo => {
             this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
         );
-
-
-        console.log(this.props.match.params.id); // save this in state
     }
 
     render() {

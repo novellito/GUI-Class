@@ -10,10 +10,9 @@ class AddFriends extends Component {
         friends: []
     }  
 
+    // Removes the newly added friend from the "Add a friend" list
+    // Also save the added friend to the database
     addFriend(id,f) {
-        console.log(id);
-        console.log(f);
-        
         this.setState({friends:this.state.friends.filter(el=>el.id!==id)}, ()=> {
             this.props.onFriendAdded(f)
         })
@@ -30,6 +29,7 @@ class AddFriends extends Component {
         }).then(res => res.json()).then(res=>console.log(res))
     }
 
+    // Loads a list of all the users that are currently not friends with the current user
     componentDidMount() {
         fetch(`/friends/${this.props.userID}`)
             .then(res => res.json())

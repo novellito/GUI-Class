@@ -17,6 +17,7 @@ class Login extends Component {
 
     let redirect = null;
 
+    // Redirect the user to the dashboard if their login credentials are correct
     if (this.state.validLogin) {
       redirect = <Redirect test="hello" to={"/dashboard/"+ 123456}></Redirect>
     }
