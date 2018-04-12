@@ -6,7 +6,9 @@ import Friends from '../../components/Friends/Friends'
 class Dashboard extends Component {
 
     state = {
-        active: false
+        active: false,
+        user_id: this.props.match.params.id
+
     };
 
     handleToggle = () => {
@@ -17,6 +19,11 @@ class Dashboard extends Component {
 
     close = () => {
         console.log('closing');
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+        console.log(this.props.match.params.id); // save this in state
     }
 
     render() {
@@ -35,7 +42,7 @@ class Dashboard extends Component {
                                 <button onClick={this.handleToggle}>
                                     test</button>
                             </Drawer>
-                            <Friends active={this.state.active}/>
+                            <Friends userID={this.state.user_id} active={this.state.active}/>
                         </div>
                        
                     </div>

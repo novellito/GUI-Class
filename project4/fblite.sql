@@ -18,7 +18,7 @@ CREATE TABLE posts (
 DROP TABLE IF EXISTS user_friends;
 
 CREATE TABLE user_friends (
- id int(11) unsigned NOT NULL AUTO_INCREMENT,
+ id int(11) unsigned AUTO_INCREMENT,
  user_id int(11) unsigned NOT NULL,
  friend_id int(11) unsigned NOT NULL,
  PRIMARY KEY (id)
