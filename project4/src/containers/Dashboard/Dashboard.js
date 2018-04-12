@@ -7,7 +7,8 @@ class Dashboard extends Component {
 
     state = {
         active: false,
-        user_id: this.props.match.params.id
+        user_id: this.props.match.params.id,
+        userInfo:''
 
     };
 
@@ -21,13 +22,26 @@ class Dashboard extends Component {
         console.log('closing');
     }
 
-    componentDidMount() {
-        console.log(this.props);
+    componentWillMount() {
+      
+        fetch(`/userInfo/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then(userInfo => {
+            this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
+        );
+
+
         console.log(this.props.match.params.id); // save this in state
     }
 
     render() {
 
+        let name = null;
+        let age = null;
+        if(this.state.userInfo!=='') {
+             name = this.state.userInfo[0].fname + " " + this.state.userInfo[0].lname ;
+             age = this.state.userInfo[0].age;
+        }
         return (
             <div className="window">
                 <div className="window-content">
@@ -36,8 +50,8 @@ class Dashboard extends Component {
                             <Drawer className="pane-mini sidebar user-detail" open={true}>
                                 <div className="user-details">
                                     <i className="material-icons face">face</i>
-                                    <p className="username">Bob Smith</p>
-                                    <p className="age">21</p>
+                                    <p className="username">{name}</p>
+                                    <p className="age">{age}</p>
                                 </div>
                                 <button onClick={this.handleToggle}>
                                     test</button>

@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS fblite;
 CREATE DATABASE fblite;
 USE fblite; 
 

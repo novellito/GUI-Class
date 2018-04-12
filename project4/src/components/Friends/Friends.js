@@ -28,8 +28,32 @@ class Friends extends Component {
     addingFriend = () => {
         this.setState({addingAFriend:!this.state.addingAFriend});
     }
-    deletingFriend = () => {
-        this.setState({deletingAFriend:!this.state.addingAFriend});
+
+    toggleDeletingFriend = () => {
+        this.setState({deletingAFriend:!this.state.deletingAFriend,addingAFriend:false});
+    }
+    deleteFriend(friendId,id) {
+        let dataID = null;
+        friendId? dataID=friendId: dataID=id;
+        const data = {
+            userID:this.props.userID,
+            id:dataID
+        }
+
+        this.setState({friends:this.state.friends.filter(el=>el.id!==id)});
+
+        fetch(`/deleteAFriend/${this.props.userID}`, {
+            method:'POST',
+            body:JSON.stringify(data),
+            headers: new Headers({'Content-Type':'application/json'})
+           
+        }).then(res => res.json()).then(res=>console.log(res))
+    }
+
+   
+    addToList = (f) => {
+        console.log(f)
+        this.setState({friend:this.state.friends.push(f)})
     }
 
     componentDidMount() {
@@ -41,7 +65,7 @@ class Friends extends Component {
 
         let addingFriend = null;
         if(this.state.addingAFriend) {
-            addingFriend = <AddFriends userID={this.props.userID}/>
+            addingFriend = <AddFriends  onFriendAdded={this.addToList} userID={this.props.userID}/>
         }
         return (
 
@@ -60,8 +84,7 @@ class Friends extends Component {
                         iconStyle={{cursor:"pointer"}}
                             tooltip={this.state.deletingAFriend?  "Remove Friend" : "View Profile"}
                             tooltipPosition="top-left">
-                            {this.state.deletingAFriend?  <Close/> : <Search/>}
-                           
+                            {this.state.deletingAFriend?  <Close onClick={()=>this.deleteFriend(friend.friend_id,friend.id)}/> : <Search/>}
                         </IconButton>}/>
                     )}
                 </List>
@@ -70,8 +93,10 @@ class Friends extends Component {
             <Divider/>
 
             <div className="friend-options">
-                <RaisedButton onClick={this.deletingFriend} backgroundColor="#FF1744" className="del-btn" >
+                <RaisedButton onClick={this.toggleDeletingFriend} backgroundColor="#FF1744" className="del-btn" >
                     <i className="material-icons del">delete</i>
+                    <span>/</span>
+                    <i className="material-icons ser">search</i>
                 </RaisedButton>
 
                 <RaisedButton onClick={this.addingFriend} backgroundColor="#00E676">
