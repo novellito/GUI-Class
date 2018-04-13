@@ -86,34 +86,32 @@ class Dashboard extends Component {
                             </button>
                         </Drawer>
 
-                            <div className="statusUpdate">
-                                <h4>Update Your Status</h4>
-                                <TextField className="statusText" hintText="Update Status" ref="statusText"/>
-                                <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
-                            </div>
+                        <div className="statusUpdate">
+                            <h4>Update Your Status</h4>
+                            <TextField className="statusText" hintText="Update Status" ref="statusText"/>
+                            <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
+                        </div>
 
-                            <div className="addPost">
-                                <h4>Add a Post</h4>
-                                <TextField
-                                    className="post"
-                                    hintText="Add Post"
-                                    multiLine={true}
-                                    rows={1}
-                                    rowsMax={4}
-                                    ref="postText"
-                                />
-                                <RaisedButton label="Add" primary={true} onClick={this.addPost.bind(this)}/>
-                            </div>
+                        <div className="addPost">
+                            <h4>Add a Post</h4>
+                            <TextField
+                                className="post"
+                                hintText="Add Post"
+                                multiLine={true}
+                                rows={1}
+                                rowsMax={4}
+                                ref="postText"
+                            />
+                            <RaisedButton label="Add" primary={true} onClick={this.addPost.bind(this)}/>
+                        </div>
 
-                            <div className="listPosts">
-                                <Posts userID={this.state.user_id}/>
-                            </div>
+                        <div className="listPosts">
+                            <Posts userID={this.state.user_id}/>
+                        </div>
 
-                            <Friends userID={this.state.user_id} active={this.state.active}/>
+                        <Friends userID={this.state.user_id} active={this.state.active}/>
                     </div>
-                
                 </div>
-
             </div>
         );
     }
