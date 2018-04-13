@@ -22,6 +22,24 @@ class Dashboard extends Component {
         console.log('closing');
     }
 
+    addPost(post) {
+        post.preventDefault();
+        let p = this.refs.postText.getValue();
+        var addPostRequest = new Request('http://localhost:5000/addPost', {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json'}),
+            body: JSON.stringify(p)
+        });
+
+        fetch(addPostRequest)
+            .then(function(resp) {
+                resp.json()
+                    .then(function(data) {
+                        console.log(data)
+                    })
+            })
+    }
+
     render() {
 
         return (
@@ -45,14 +63,17 @@ class Dashboard extends Component {
 
                             <div className="addPost">
                                 <h3>Add a Post</h3>
-                                <TextField
-                                    className="post"
-                                    hintText="Add post"
-                                    multiLine={true}
-                                    rows={1}
-                                    rowsMax={4}
-                                />
-                                <RaisedButton label="Primary" primary={true} />
+                                {/* <form ref="postForm"> */}
+                                    <TextField
+                                        className="post"
+                                        hintText="Add Post"
+                                        multiLine={true}
+                                        rows={1}
+                                        rowsMax={4}
+                                        ref="postText"
+                                    />
+                                    <RaisedButton label="Primary" primary={true} onClick={this.addPost.bind(this)}/>
+                                {/* </form> */}
                             </div>
 
                             <div className="listPosts">
