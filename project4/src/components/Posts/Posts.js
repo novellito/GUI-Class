@@ -16,7 +16,7 @@ class Posts extends Component {
     }
 
     componentDidMount() {
-        fetch('/posts')
+        fetch(`/posts/${this.props.userID}`)
             .then(res => res.json())
             .then(posts => this.setState({ posts }, () => console.log("Posts received..", posts)));
     }
@@ -24,18 +24,20 @@ class Posts extends Component {
         return (
 
             <div className="list">
-                <h4>Posts</h4>
+                <h3>Your Posts</h3>
                 <List>
-                    {this.state.posts.map(post =>
+                    {this.state.posts.map((post, index) =>
                         <ListItem key={post.id}
-                            primaryText={<span>{this.state.posts.length}. {post.post}</span>}
+                            primaryText={<span>{post.post}</span>}
+                            leftIcon={<span>{index+1}.</span>}
                             rightIconButton={
                                 <IconButton
                                 iconStyle={{cursor:"pointer"}}
                                     tooltip="Remove Post"
                                     tooltipPosition="top-left">
                                     <Close/>
-                                </IconButton>}
+                                </IconButton>
+                            }
                         />
                     )}
                 </List>

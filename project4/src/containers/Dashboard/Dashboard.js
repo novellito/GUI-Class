@@ -39,19 +39,34 @@ class Dashboard extends Component {
 
         fetch(`/addPost/${userID}`, {
             method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json'}),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(p)
-        }).then(res => res.json()).then(res=>console.log(res))
+        }).then(res => res.json()).then(res => console.log(res))
+    }
+
+    updateStatus(status) {
+        let s = {
+            status: this.refs.statusText.getValue()
+        }
+        let userID = this.state.user_id;
+
+        fetch(`/updateStatus/${userID}`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(s)
+        }).then(res => res.json()).then(res => console.log(res))
     }
 
     render() {
         let name = null;
         let age = null;
         let dob = null;
+        let status = null;
         if(this.state.userInfo!=='') {
              name = this.state.userInfo[0].fname + " " + this.state.userInfo[0].lname ;
              age = this.state.userInfo[0].age;
              dob = this.state.userInfo[0].DOB;
+             status = this.state.userInfo[0].status;
         }
 
         return (
@@ -63,35 +78,35 @@ class Dashboard extends Component {
                                 <i className="material-icons face">face</i>
                                 <p className="username">{name}</p>
                                 <p className="dob">{dob}</p>
-                                <p className="age">{age}</p>
+                                <p className="age">Age: {age}</p>
+                                <p className="status">Status: {status}</p>
                             </div>
                             <button onClick={this.handleToggle}>
                                 test
                             </button>
                         </Drawer>
 
-                            <div className="status">
-                                <TextField className="statusText" hintText="Update Status"/>
-                                <RaisedButton label="Primary" primary={true} />
+                            <div className="statusUpdate">
+                                <h4>Update Your Status</h4>
+                                <TextField className="statusText" hintText="Update Status" ref="statusText"/>
+                                <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
                             </div>
 
                             <div className="addPost">
-                                <h3>Add a Post</h3>
-                                {/* <form ref="postForm"> */}
-                                    <TextField
-                                        className="post"
-                                        hintText="Add Post"
-                                        multiLine={true}
-                                        rows={1}
-                                        rowsMax={4}
-                                        ref="postText"
-                                    />
-                                    <RaisedButton label="Primary" primary={true} onClick={this.addPost.bind(this)}/>
-                                {/* </form> */}
+                                <h4>Add a Post</h4>
+                                <TextField
+                                    className="post"
+                                    hintText="Add Post"
+                                    multiLine={true}
+                                    rows={1}
+                                    rowsMax={4}
+                                    ref="postText"
+                                />
+                                <RaisedButton label="Add" primary={true} onClick={this.addPost.bind(this)}/>
                             </div>
 
                             <div className="listPosts">
-                                <Posts />
+                                <Posts userID={this.state.user_id}/>
                             </div>
 
                             <Friends userID={this.state.user_id} active={this.state.active}/>

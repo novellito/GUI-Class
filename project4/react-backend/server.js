@@ -71,12 +71,24 @@ app.get('/friendsList/:userId', function(req, res) {
 // returns the users information
 app.get('/userInfo/:userId', function(req, res) {
     let userID = req.params.userId;
-    let friendQuery = `SELECT fname,lname,DOB,age,username,toggle_status,toggle_posts,toggle_friends,toggle_dob FROM users WHERE id=${userID}` ;
+    let friendQuery = `SELECT fname,lname,DOB,status,age,username,toggle_status,toggle_posts,toggle_friends,toggle_dob FROM users WHERE id=${userID}` ;
 
     connection.query(friendQuery, function(error, results, fields) {
         if (error) throw error;
     //    console.log(results)
         res.json(results); 
+    });
+});
+
+// updates the user's status
+app.post('/updateStatus/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let status = JSON.stringify(req.body.status);
+
+    let updateStatusQuery = `UPDATE users SET status=${status} WHERE id=${userID}`;
+    connection.query(updateStatusQuery, function(error, results, fields) {
+        if(error) throw error;
+        res.json(status);
     });
 });
 
@@ -120,12 +132,12 @@ app.post('/deleteAFriend/:userId', function(req, res) {
 });
 
 // Get Posts Listing
-app.get('/posts', function(req, res) {
-    let userID = '123456';
-    let postQuery = `SELECT * FROM posts WHERE user_id=${userID}`;
+app.get('/posts/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let getPostsQuery = `SELECT * FROM posts WHERE user_id=${userID}`;
 
     let posts = [];
-    connection.query(postQuery, function(error, results, fields) {
+    connection.query(getPostsQuery, function(error, results, fields) {
         if (error) throw error;
         for(post in results) {
             posts.push(results[post]);

@@ -18,6 +18,11 @@
 }
 
 .status {
+    font-size: 20px;
+    margin: 0;
+}
+
+.statusUpdate {
     position: absolute;
     margin-top: 50px;
     left: 40%;
@@ -29,7 +34,7 @@
 
 .addPost {
     position: absolute;
-    margin-top: 100px;
+    margin-top: 160px;
     left: 40%;
 }
 
@@ -39,6 +44,6 @@
 
 .listPosts {
     position: absolute;
-    margin-top: 250px;
+    margin-top: 300px;
     left: 40%;
 }
