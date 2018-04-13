@@ -9,7 +9,10 @@ import Posts from '../../components/Posts/Posts'
 class Dashboard extends Component {
 
     state = {
-        active: false
+        active: false,
+        user_id: this.props.match.params.id,
+        userInfo:''
+
     };
 
     handleToggle = () => {
@@ -18,8 +21,13 @@ class Dashboard extends Component {
         });
     };
 
-    close = () => {
-        console.log('closing');
+    // method to fetch the current users information so that it can be used later
+    componentWillMount() {
+        fetch(`/userInfo/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then(userInfo => {
+            this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
+        );
     }
 
     addPost(post) {
@@ -42,6 +50,14 @@ class Dashboard extends Component {
 
     render() {
 
+        let name = null;
+        let age = null;
+        let dob = null;
+        if(this.state.userInfo!=='') {
+             name = this.state.userInfo[0].fname + " " + this.state.userInfo[0].lname ;
+             age = this.state.userInfo[0].age;
+             dob = this.state.userInfo[0].DOB;
+        }
         return (
             <div className="window">
                 <div className="window-content">
@@ -49,38 +65,16 @@ class Dashboard extends Component {
                             <Drawer className="pane-mini sidebar user-detail" open={true}>
                                 <div className="user-details">
                                     <i className="material-icons face">face</i>
-                                    <p className="username">Bob Smith</p>
-                                    <p className="age">21</p>
+                                    <p className="username">{name}</p>
+                                    <p className="dob">{dob}</p>
+                                    <p className="age">{age}</p>
                                 </div>
                                 <button onClick={this.handleToggle}>
                                     test</button>
                             </Drawer>
-
-                            <div className="status">
-                                <TextField className="statusText" hintText="Update Status"/>
-                                <RaisedButton label="Primary" primary={true} />
-                            </div>
-
-                            <div className="addPost">
-                                <h3>Add a Post</h3>
-                                {/* <form ref="postForm"> */}
-                                    <TextField
-                                        className="post"
-                                        hintText="Add Post"
-                                        multiLine={true}
-                                        rows={1}
-                                        rowsMax={4}
-                                        ref="postText"
-                                    />
-                                    <RaisedButton label="Primary" primary={true} onClick={this.addPost.bind(this)}/>
-                                {/* </form> */}
-                            </div>
-
-                            <div className="listPosts">
-                                <Posts />
-                            </div>
-
-                            <Friends active={this.state.active}/>
+                            <Friends userID={this.state.user_id} active={this.state.active}/>
+                        </div>
+                       
                     </div>
                 
                 </div>

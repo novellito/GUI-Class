@@ -1,0 +1,13 @@
+.pic {
+    font-size:5em;
+}
+
+.username {
+    margin-top:-10px;
+}
+
+.username ~ p {
+    margin:0px;
+}
+
+
