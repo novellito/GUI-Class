@@ -32,24 +32,19 @@ class Dashboard extends Component {
 
     addPost(post) {
         post.preventDefault();
-        let p = this.refs.postText.getValue();
-        var addPostRequest = new Request('http://localhost:5000/addPost', {
+        let p = {
+            post: this.refs.postText.getValue()
+        }
+        let userID = this.state.user_id;
+
+        fetch(`/addPost/${userID}`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json'}),
             body: JSON.stringify(p)
-        });
-
-        fetch(addPostRequest)
-            .then(function(resp) {
-                resp.json()
-                    .then(function(data) {
-                        console.log(data)
-                    })
-            })
+        }).then(res => res.json()).then(res=>console.log(res))
     }
 
     render() {
-
         let name = null;
         let age = null;
         let dob = null;
@@ -58,23 +53,48 @@ class Dashboard extends Component {
              age = this.state.userInfo[0].age;
              dob = this.state.userInfo[0].DOB;
         }
+
         return (
             <div className="window">
                 <div className="window-content">
                     <div className="pane-group">
-                            <Drawer className="pane-mini sidebar user-detail" open={true}>
-                                <div className="user-details">
-                                    <i className="material-icons face">face</i>
-                                    <p className="username">{name}</p>
-                                    <p className="dob">{dob}</p>
-                                    <p className="age">{age}</p>
-                                </div>
-                                <button onClick={this.handleToggle}>
-                                    test</button>
-                            </Drawer>
+                        <Drawer className="pane-mini sidebar user-detail" open={true}>
+                            <div className="user-details">
+                                <i className="material-icons face">face</i>
+                                <p className="username">{name}</p>
+                                <p className="dob">{dob}</p>
+                                <p className="age">{age}</p>
+                            </div>
+                            <button onClick={this.handleToggle}>
+                                test
+                            </button>
+                        </Drawer>
+
+                            <div className="status">
+                                <TextField className="statusText" hintText="Update Status"/>
+                                <RaisedButton label="Primary" primary={true} />
+                            </div>
+
+                            <div className="addPost">
+                                <h3>Add a Post</h3>
+                                {/* <form ref="postForm"> */}
+                                    <TextField
+                                        className="post"
+                                        hintText="Add Post"
+                                        multiLine={true}
+                                        rows={1}
+                                        rowsMax={4}
+                                        ref="postText"
+                                    />
+                                    <RaisedButton label="Primary" primary={true} onClick={this.addPost.bind(this)}/>
+                                {/* </form> */}
+                            </div>
+
+                            <div className="listPosts">
+                                <Posts />
+                            </div>
+
                             <Friends userID={this.state.user_id} active={this.state.active}/>
-                        </div>
-                       
                     </div>
                 
                 </div>

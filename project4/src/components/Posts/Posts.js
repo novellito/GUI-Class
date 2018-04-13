@@ -28,7 +28,7 @@ class Posts extends Component {
                 <List>
                     {this.state.posts.map(post =>
                         <ListItem key={post.id}
-                            primaryText={<span>{post.id}. {post.post}</span>}
+                            primaryText={<span>{this.state.posts.length}. {post.post}</span>}
                             rightIconButton={
                                 <IconButton
                                 iconStyle={{cursor:"pointer"}}
