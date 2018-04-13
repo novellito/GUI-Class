@@ -11,8 +11,9 @@ class Dashboard extends Component {
     state = {
         active: false,
         user_id: this.props.match.params.id,
-        userInfo:''
-
+        userInfo:'',
+        postErrorText: '',
+        statusErrorText: ''
     };
 
     handleToggle = () => {
@@ -32,29 +33,41 @@ class Dashboard extends Component {
 
     addPost(post) {
         post.preventDefault();
-        let p = {
-            post: this.refs.postText.getValue()
+        if(this.refs.postText.getValue() === '') {
+            this.setState({postErrorText: 'Please enter text'});
         }
-        let userID = this.state.user_id;
+        else {
+            this.setState({postErrorText: ''});
+            let p = {
+                post: this.refs.postText.getValue()
+            }
+            let userID = this.state.user_id;
 
-        fetch(`/addPost/${userID}`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify(p)
-        }).then(res => res.json()).then(res => console.log(res))
+            fetch(`/addPost/${userID}`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(p)
+            }).then(res => res.json()).then(res => console.log(res))
+        }
     }
 
     updateStatus(status) {
-        let s = {
-            status: this.refs.statusText.getValue()
+        status.preventDefault();
+        if(this.refs.statusText.getValue() === '') {
+            this.setState({statusErrorText: 'Please enter text'});
         }
-        let userID = this.state.user_id;
+        else {
+            let s = {
+                status: this.refs.statusText.getValue()
+            }
+            let userID = this.state.user_id;
 
-        fetch(`/updateStatus/${userID}`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify(s)
-        }).then(res => res.json()).then(res => console.log(res))
+            fetch(`/updateStatus/${userID}`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(s)
+            }).then(res => res.json()).then(res => console.log(res))
+        }
     }
 
     render() {
@@ -88,7 +101,12 @@ class Dashboard extends Component {
 
                         <div className="statusUpdate">
                             <h4>Update Your Status</h4>
-                            <TextField className="statusText" hintText="Update Status" ref="statusText"/>
+                            <TextField 
+                                className="statusText" 
+                                hintText="Update Status"
+                                errorText={this.state.statusErrorText}
+                                ref="statusText"
+                            />
                             <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
                         </div>
 
@@ -97,6 +115,7 @@ class Dashboard extends Component {
                             <TextField
                                 className="post"
                                 hintText="Add Post"
+                                errorText={this.state.postErrorText}
                                 multiLine={true}
                                 rows={1}
                                 rowsMax={4}
