@@ -134,6 +134,23 @@ app.get('/posts', function(req, res) {
     });
 });
 
+// Add a Post
+app.post('/addPost/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let post = JSON.stringify(req.body.post);
+    
+    let addPostQuery = `INSERT INTO posts (user_id, post) VALUES (${userID}, ${post})`;
+    
+    let posts = [];
+    connection.query(addPostQuery, function(error, results, fields) {
+        if(error) throw error;
+        for(post in results) {
+            posts.push(results[post]);
+        }
+        res.json(posts);
+    });
+});
+
 const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
