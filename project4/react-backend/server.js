@@ -71,7 +71,7 @@ app.get('/friendsList/:userId', function(req, res) {
 // returns the users information
 app.get('/userInfo/:userId', function(req, res) {
     let userID = req.params.userId;
-    let friendQuery = `SELECT fname,lname,DOB,age,username FROM users WHERE id=${userID}` ;
+    let friendQuery = `SELECT fname,lname,DOB,age,username,toggle_status,toggle_posts,toggle_friends,toggle_dob FROM users WHERE id=${userID}` ;
 
     connection.query(friendQuery, function(error, results, fields) {
         if (error) throw error;

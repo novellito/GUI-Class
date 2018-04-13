@@ -31,9 +31,11 @@ class Dashboard extends Component {
 
         let name = null;
         let age = null;
+        let dob = null;
         if(this.state.userInfo!=='') {
              name = this.state.userInfo[0].fname + " " + this.state.userInfo[0].lname ;
              age = this.state.userInfo[0].age;
+             dob = this.state.userInfo[0].DOB;
         }
         return (
             <div className="window">
@@ -44,6 +46,7 @@ class Dashboard extends Component {
                                 <div className="user-details">
                                     <i className="material-icons face">face</i>
                                     <p className="username">{name}</p>
+                                    <p className="dob">{dob}</p>
                                     <p className="age">{age}</p>
                                 </div>
                                 <button onClick={this.handleToggle}>

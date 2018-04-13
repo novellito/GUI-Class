@@ -46,6 +46,10 @@ CREATE TABLE users (
  DOB date NOT NULL,
  status varchar(256) DEFAULT NULL,
  username char(10) NOT NULL,
+ toggle_status char(10) DEFAULT 'true',
+ toggle_posts char(10) DEFAULT 'true',
+ toggle_friends char(10) DEFAULT 'true',
+ toggle_dob char(10) DEFAULT 'true',
  password text NOT NULL,
  email varchar(256) NOT NULL DEFAULT '',
  PRIMARY KEY (id)
@@ -54,8 +58,8 @@ CREATE TABLE users (
 
 /*!40000 ALTER TABLE users DISABLE KEYS */;
 
-INSERT INTO users (id, fname, lname, age, DOB, status, username, password, email)
+INSERT INTO users (id, fname, lname, age, DOB, status, username,toggle_status,toggle_posts,toggle_friends,toggle_dob, password, email)
 VALUES
-	(123456,'Ben','doe',21,'1996-06-07',NULL,'bend12','0','ben@email.com'),
-	(234901,'Tom','doe',21,'1993-05-01',NULL,'tdoe12','0','Tom@gmail.com'),
-	(425789,'Jason','doe',20,'1990-06-09',NULL,'jasond12','0','jason@yahoo.com');
+	(123456,'Ben','doe',21,'1996-06-07',NULL,'bend12','true','true','true','true','0','ben@email.com'),
+	(234901,'Tom','doe',21,'1993-05-01',NULL,'tdoe12','true','true','true','true','0','Tom@gmail.com'),
+	(425789,'Jason','doe',20,'1990-06-09',NULL,'jasond12','true','true','true','true','0','jason@yahoo.com');
