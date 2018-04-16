@@ -32,16 +32,6 @@
     margin-right: 20px;
 }
 
-.addPost {
-    position: absolute;
-    margin-top: 160px;
-    left: 40%;
-}
-
-.post {
-    margin-right: 20px;
-} 
-
 .listPosts {
     position: absolute;
     margin-top: 300px;
