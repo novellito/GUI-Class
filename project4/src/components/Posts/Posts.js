@@ -29,7 +29,6 @@ class Posts extends Component {
         }
         else {
             this.setState({postErrorText: ''});
-            this.setState({post: this.state.posts.push(post)});
             let p = {
                 post: this.refs.postText.getValue()
             }
@@ -40,45 +39,52 @@ class Posts extends Component {
                 headers: new Headers({ 'Content-Type': 'application/json' }),
                 body: JSON.stringify(p)
             }).then(res => res.json()).then(res => console.log(res))
+
+            this.refs.postText.getInputNode().value = "";
+
+            // Make another get request to update posts
+            fetch(`/posts/${this.props.userID}`)
+            .then(res => res.json())
+            .then(posts => this.setState({ posts }, () => console.log("Posts received..", posts)));
         }
     }
 
     render(props) {
         return (
             <div>
-            <div className="addPost">
-                <h4>Add a Post</h4>
-                <TextField
-                    className="post"
-                    hintText="Add Post"
-                    errorText={this.state.postErrorText}
-                    multiLine={true}
-                    rows={1}
-                    rowsMax={4}
-                    ref="postText"
-                />
-                <RaisedButton label="Add" primary={true} onClick={this.addPost.bind(this)}/>
-            </div>
+                <div className="addPost">
+                    <h4>Add a Post</h4>
+                    <TextField
+                        className="post"
+                        hintText="Add Post"
+                        errorText={this.state.postErrorText}
+                        multiLine={true}
+                        rows={1}
+                        rowsMax={4}
+                        ref="postText"
+                    />
+                    <RaisedButton label="Add" primary={true} onClick={this.addPost.bind(this)}/>
+                </div>
 
-            <div className="list">
-                <h3>Your Posts</h3>
-                <List>
-                    {this.state.posts.map((post, index) =>
-                        <ListItem key={post.id}
-                            primaryText={<span>{post.post}</span>}
-                            leftIcon={<span>{index+1}.</span>}
-                            rightIconButton={
-                                <IconButton
-                                iconStyle={{cursor:"pointer"}}
-                                    tooltip="Remove Post"
-                                    tooltipPosition="top-left">
-                                    <Close/>
-                                </IconButton>
-                            }
-                        />
-                    )}
-                </List>
-            </div>
+                <div className="list">
+                    <h3>Your Posts</h3>
+                    <List>
+                        {this.state.posts.map((post, index) =>
+                            <ListItem key={post.id}
+                                primaryText={<span>{post.post}</span>}
+                                leftIcon={<span>{index+1}.</span>}
+                                rightIconButton={
+                                    <IconButton
+                                    iconStyle={{cursor:"pointer"}}
+                                        tooltip="Remove Post"
+                                        tooltipPosition="top-left">
+                                        <Close/>
+                                    </IconButton>
+                                }
+                            />
+                        )}
+                    </List>
+                </div>
             </div>
         );
     }

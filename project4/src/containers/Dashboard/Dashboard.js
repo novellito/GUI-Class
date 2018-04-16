@@ -46,6 +46,15 @@ class Dashboard extends Component {
                 headers: new Headers({ 'Content-Type': 'application/json' }),
                 body: JSON.stringify(s)
             }).then(res => res.json()).then(res => console.log(res))
+
+            this.refs.statusText.getInputNode().value = "";
+
+            // Another get request to see updated status of user
+            fetch(`/userInfo/${this.props.match.params.id}`)
+            .then(res => res.json())
+            .then(userInfo => {
+                this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
+            );
         }
     }
 
