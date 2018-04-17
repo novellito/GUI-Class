@@ -22,6 +22,7 @@ class Posts extends Component {
             .then(posts => this.setState({ posts }, () => console.log("Posts received..", posts)));
     }
 
+    // Add a Post
     addPost(post) {
         post.preventDefault();
         if(this.refs.postText.getValue() === '') {
@@ -42,11 +43,30 @@ class Posts extends Component {
 
             this.refs.postText.getInputNode().value = "";
 
-            // Make another get request to update posts
+            // Make another get request to update posts in the view 
             fetch(`/posts/${this.props.userID}`)
             .then(res => res.json())
             .then(posts => this.setState({ posts }, () => console.log("Posts received..", posts)));
         }
+    }
+
+    // Delete a Post
+    deletePost(post_id) {
+
+        let data = {
+            p_id: post_id
+        }
+
+        fetch(`/deletePost/${post_id}`, {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        }).then(res => res.json()).then(res => console.log(res))
+
+        // Make another get request to update posts in the view 
+        fetch(`/posts/${this.props.userID}`)
+        .then(res => res.json())
+        .then(posts => this.setState({ posts }, () => console.log("Posts received..", posts)));
     }
 
     render(props) {
@@ -69,6 +89,7 @@ class Posts extends Component {
                 <div className="list">
                     <h3>Your Posts</h3>
                     <List>
+                        {this.state.posts.length === 0 ? <ListItem primaryText={<span>No Posts!</span>}/> : ''}
                         {this.state.posts.map((post, index) =>
                             <ListItem key={post.id}
                                 primaryText={<span>{post.post}</span>}
@@ -78,7 +99,7 @@ class Posts extends Component {
                                     iconStyle={{cursor:"pointer"}}
                                         tooltip="Remove Post"
                                         tooltipPosition="top-left">
-                                        <Close/>
+                                        <Close onClick={()=>this.deletePost(post.id)} />
                                     </IconButton>
                                 }
                             />
