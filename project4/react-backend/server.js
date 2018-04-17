@@ -163,6 +163,26 @@ app.post('/addPost/:userId', function(req, res) {
     });
 });
 
+// Delete a Post
+app.post('/deletePost/:postId', function(req, res) {
+
+    console.log(req.body)
+
+    let postID = req.body.p_id;
+
+    let friendQuery = `DELETE FROM posts WHERE id= ${postID}`;
+
+    let posts = [];
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        for(post in posts) {
+          posts.push(results[post]);
+        }
+        res.json(posts); 
+    });
+    
+});
+
 const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
