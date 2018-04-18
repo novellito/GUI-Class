@@ -23,8 +23,6 @@ class Dashboard extends Component {
         this.setState({
             friendsActive: !this.state.friendsActive
         });
-
-
         fetch(`/toggleFriendPreview/${this.props.match.params.id}`, {
             method:'PUT',
             body:JSON.stringify({status:!this.state.friendsActive}),
@@ -36,8 +34,6 @@ class Dashboard extends Component {
         this.setState({
             postsActive: !this.state.postsActive
         });
-
-
         fetch(`/togglePosts/${this.props.match.params.id}`, {
             method:'PUT',
             body:JSON.stringify({status:!this.state.postsActive}),
@@ -49,8 +45,6 @@ class Dashboard extends Component {
         this.setState({
             statusActive: !this.state.statusActive
         });
-
-
         fetch(`/status/${this.props.match.params.id}`, {
             method:'PUT',
             body:JSON.stringify({status:!this.state.statusActive}),
@@ -62,8 +56,6 @@ class Dashboard extends Component {
         this.setState({
             dobActive: !this.state.dobActive
         });
-
-
         fetch(`/dob/${this.props.match.params.id}`, {
             method:'PUT',
             body:JSON.stringify({status:!this.state.dobActive}),
@@ -78,7 +70,6 @@ class Dashboard extends Component {
         .then(res => res.json())
         .then(userInfo => {
             this.setState({ userInfo }, () =>{
-
                 if(this.state.userInfo[0].toggle_friends === '1') { // show friends list on load
                     this.setState({friendsActive:true});
                 }
@@ -91,13 +82,10 @@ class Dashboard extends Component {
                 if(this.state.userInfo[0].toggle_dob === '1') { // show friends list on load
                     this.setState({dobActive:true});
                 }
-
                 console.log("user info...", userInfo[0])
-                console.log(this.state.userInfo[0].toggle_friends)
             }
             )}
         );
-
         
     }
 
@@ -140,7 +128,6 @@ class Dashboard extends Component {
              dob = this.state.userInfo[0].DOB;
              status = this.state.userInfo[0].status;
         }
-
         return (
             <div className="window">
                 <div className="window-content">
@@ -164,7 +151,7 @@ class Dashboard extends Component {
                                     toggleFriends={this.toggleFriendsList}/>
                         </Drawer>
                         {this.state.statusActive?
-                        <div className={this.state.friendsActive === true ? "openStatusUpdate" : "closeStatusUpdate"}>
+                            <div className={this.state.friendsActive === true ? "openStatusUpdate" : "closeStatusUpdate"}>
                             <h4>Update Your Status</h4>
                             <TextField 
                                 className="statusText" 
@@ -173,14 +160,12 @@ class Dashboard extends Component {
                                 ref="statusText"
                                 />
                             <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
-                        </div>
-                        :''}
+                            </div>:''}
 
                         {this.state.postsActive?
                             <div className={this.state.friendsActive === true ? "openListPosts" : "closeListPosts"}>
                                 <Posts userID={this.state.user_id}/>
-                            </div>:''
-                        }
+                            </div>:''}
 
                         <Friends userID={this.state.user_id} active={this.state.friendsActive}/>
                     </div>
