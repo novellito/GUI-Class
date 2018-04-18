@@ -1,0 +1,19 @@
+#landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: -webkit-linear-gradient(45deg, #2196F5, #8373f3 90%);
+    ;
+}
+
+#landing h1 {
+    color: white;
+    font-size: 5em;
+    margin-top: -50px;
+}
+
+.land-btns {
+    margin: 0px 15px;
+}

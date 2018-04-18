@@ -1,0 +1,16 @@
+.addPost {
+    /* position: absolute; */
+    /* margin-top: 100px; */
+    left: 40%;
+    margin-top: -130px;
+    margin-bottom: 65px;
+}
+
+.post {
+    margin-right: 20px;
+} 
+
+.item {
+    max-width: 350px;
+    word-wrap: break-word;
+}

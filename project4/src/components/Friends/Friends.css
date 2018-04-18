@@ -38,3 +38,16 @@
     margin-top: 5px;
     color: white;
 }
+
+.del + span {
+    color:white;
+    position: relative;
+    bottom:3px;
+    font-size: 27px;
+}
+.ser {
+    color: white;
+    margin-top: 2px;
+    
+    
+}
