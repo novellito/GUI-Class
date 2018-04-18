@@ -1,0 +1,27 @@
+/* .gearIcon { */
+    /* position:abs`olute; */
+    /* bottom:0;` */
+    /* left:30%; */
+/* } */
+
+.settingsWrapper {
+    position:absolute;
+    bottom:0;
+    left:24%;
+    width:50px;
+}
+
+/* .settings:hover {
+    cursor:pointer;
+} */
+svg:hover {
+    cursor:pointer;
+}
+
+.toggles {
+    position:absolute;
+    bottom:10%;
+    left:21%;
+    width:135px;
+}
+

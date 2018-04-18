@@ -48,7 +48,7 @@ class FriendPreview extends Component {
              age = this.state.lookupInfo[0].age;
              username = this.state.lookupInfo[0].username;
             }
-        if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_dob === 'true') {
+        if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_dob === '1') {
             dob = "DOB: " + this.state.lookupInfo[0].DOB;
         }
 
@@ -66,7 +66,7 @@ class FriendPreview extends Component {
                     <p>{age}</p>
                     <p>{dob}</p>
                     <Divider/>
-                    {this.state.previewFriendsList!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_friends!=='false'?
+                    {this.state.previewFriendsList!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_friends!=='0'?
                         <List>
                             <Subheader style={{paddingLeft:'0px', fontSize:'1.3em'}}>Friends</Subheader>
                             {this.state.previewFriendsList.map(friend =>

@@ -119,6 +119,19 @@ app.post('/deleteAFriend/:userId', function(req, res) {
     
 });
 
+// toggle friends list
+app.put('/toggleFriendPreview/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_friends=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+
 const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
