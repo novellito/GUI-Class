@@ -60,6 +60,6 @@ CREATE TABLE users (
 
 INSERT INTO users (id, fname, lname, age, DOB, status, username,toggle_status,toggle_posts,toggle_friends,toggle_dob, password, email)
 VALUES
-	(123456,'Ben','doe',21,'1996-06-07',NULL,'bend12','true','true','true','true','0','ben@email.com'),
-	(234901,'Tom','doe',21,'1993-05-01',NULL,'tdoe12','true','true','true','true','0','Tom@gmail.com'),
-	(425789,'Jason','doe',20,'1990-06-09',NULL,'jasond12','true','true','true','true','0','jason@yahoo.com');
+	(123456,'Ben','doe',21,'1996-06-07',NULL,'bend12','1','1','1','1','0','ben@email.com'),
+	(234901,'Tom','doe',21,'1993-05-01',NULL,'tdoe12','1','1','1','1','0','Tom@gmail.com'),
+	(425789,'Jason','doe',20,'1990-06-09',NULL,'jasond12','1','1','1','1','0','jason@yahoo.com');

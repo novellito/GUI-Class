@@ -49,3 +49,6 @@
     margin-top: 300px;
     left: 30%;
 }
+#userDrawer {
+    position:relative;
+}

@@ -6,19 +6,70 @@ import './Dashboard.css'
 import Friends from '../../components/Friends/Friends'
 import Posts from '../../components/Posts/Posts'
 
+import Setting from '../../components/Settings/Setting'
 class Dashboard extends Component {
 
     state = {
-        active: false,
+        friendsActive: false,
+        postsActive:false,
+        statusActive:false,
+        dobActive:false,
         user_id: this.props.match.params.id,
         userInfo:'',
         statusErrorText: ''
     };
 
-    handleToggle = () => {
+    toggleFriendsList = () => {
         this.setState({
-            active: !this.state.active
+            friendsActive: !this.state.friendsActive
         });
+
+
+        fetch(`/toggleFriendPreview/${this.props.match.params.id}`, {
+            method:'PUT',
+            body:JSON.stringify({status:!this.state.friendsActive}),
+            headers: new Headers({'Content-Type':'application/json'})
+           
+        }).then(res => res.json()).then(res=>console.log(res))
+    };
+    togglePosts = () => {
+        this.setState({
+            postsActive: !this.state.postsActive
+        });
+
+
+        fetch(`/togglePosts/${this.props.match.params.id}`, {
+            method:'PUT',
+            body:JSON.stringify({status:!this.state.postsActive}),
+            headers: new Headers({'Content-Type':'application/json'})
+           
+        }).then(res => res.json()).then(res=>console.log(res))
+    };
+    toggleStatus = () => {
+        this.setState({
+            statusActive: !this.state.statusActive
+        });
+
+
+        fetch(`/status/${this.props.match.params.id}`, {
+            method:'PUT',
+            body:JSON.stringify({status:!this.state.statusActive}),
+            headers: new Headers({'Content-Type':'application/json'})
+           
+        }).then(res => res.json()).then(res=>console.log(res))
+    };
+    toggleDOB = () => {
+        this.setState({
+            dobActive: !this.state.dobActive
+        });
+
+
+        fetch(`/dob/${this.props.match.params.id}`, {
+            method:'PUT',
+            body:JSON.stringify({status:!this.state.dobActive}),
+            headers: new Headers({'Content-Type':'application/json'})
+           
+        }).then(res => res.json()).then(res=>console.log(res))
     };
 
     // method to fetch the current users information so that it can be used later
@@ -26,8 +77,28 @@ class Dashboard extends Component {
         fetch(`/userInfo/${this.props.match.params.id}`)
         .then(res => res.json())
         .then(userInfo => {
-            this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
+            this.setState({ userInfo }, () =>{
+
+                if(this.state.userInfo[0].toggle_friends === '1') { // show friends list on load
+                    this.setState({friendsActive:true});
+                }
+                if(this.state.userInfo[0].toggle_posts === '1') { // show friends list on load
+                    this.setState({postsActive:true});
+                }
+                if(this.state.userInfo[0].toggle_status === '1') { // show friends list on load
+                    this.setState({statusActive:true});
+                }
+                if(this.state.userInfo[0].toggle_dob === '1') { // show friends list on load
+                    this.setState({dobActive:true});
+                }
+
+                console.log("user info...", userInfo[0])
+                console.log(this.state.userInfo[0].toggle_friends)
+            }
+            )}
         );
+
+        
     }
 
     updateStatus(status) {
@@ -78,31 +149,40 @@ class Dashboard extends Component {
                             <div className="user-details">
                                 <i className="material-icons face">face</i>
                                 <p className="username">{name}</p>
-                                <p className="dob">{dob}</p>
+                                {this.state.dobActive?<p className="dob">{dob}</p>:''}
                                 <p className="age">Age: {age}</p>
-                                <p className="status">Status: {status}</p>
+                                {this.state.statusActive?<p className="status">Status: {status}</p>:''}
                             </div>
-                            <button onClick={this.handleToggle}>
-                                test
-                            </button>
+                            <Setting 
+                                    friends={this.state.friendsActive}
+                                    dob={this.state.dobActive}
+                                    posts={this.state.postsActive}
+                                    status={this.state.statusActive}
+                                    togglePosts={this.togglePosts}
+                                    toggleDOB={this.toggleDOB}
+                                    toggleStatus={this.toggleStatus}
+                                    toggleFriends={this.toggleFriendsList}/>
                         </Drawer>
-
-                        <div className={this.state.active === true ? "openStatusUpdate" : "closeStatusUpdate"}>
+                        {this.state.statusActive?
+                        <div className={this.state.friendsActive === true ? "openStatusUpdate" : "closeStatusUpdate"}>
                             <h4>Update Your Status</h4>
                             <TextField 
                                 className="statusText" 
                                 hintText="Update Status"
                                 errorText={this.state.statusErrorText}
                                 ref="statusText"
-                            />
+                                />
                             <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
                         </div>
+                        :''}
 
-                        <div className={this.state.active === true ? "openListPosts" : "closeListPosts"}>
-                            <Posts userID={this.state.user_id}/>
-                        </div>
+                        {this.state.postsActive?
+                            <div className={this.state.friendsActive === true ? "openListPosts" : "closeListPosts"}>
+                                <Posts userID={this.state.user_id}/>
+                            </div>:''
+                        }
 
-                        <Friends userID={this.state.user_id} active={this.state.active}/>
+                        <Friends userID={this.state.user_id} active={this.state.friendsActive}/>
                     </div>
                 </div>
             </div>

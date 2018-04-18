@@ -179,6 +179,53 @@ app.post('/deletePost/:postId', function(req, res) {
           posts.push(results[post]);
         }
         res.json(posts); 
+
+    })});
+// toggle friends list
+app.put('/toggleFriendPreview/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_friends=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle posts
+app.put('/togglePosts/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_posts=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle status
+app.put('/status/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_status=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle DOB
+app.put('/dob/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_dob=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
     });
     
 });
