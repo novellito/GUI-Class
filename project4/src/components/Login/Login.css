@@ -1,5 +1,5 @@
 .LoginForm{
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 350px;
 }
 
@@ -10,3 +10,14 @@
 .Login-Password{
     padding-right:62px;
 }
+
+.LoginLogoImageCenter{
+    margin-top:10px;
+    margin-left:350px;
+    border-radius: 50%;
+  }
+
+  .Login-Title{
+      margin-left:385px;
+      font-size:3vw;
+  }
