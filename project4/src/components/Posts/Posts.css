@@ -9,3 +9,8 @@
 .post {
     margin-right: 20px;
 } 
+
+.item {
+    max-width: 350px;
+    word-wrap: break-word;
+}

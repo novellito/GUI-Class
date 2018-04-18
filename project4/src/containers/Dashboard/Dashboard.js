@@ -87,7 +87,7 @@ class Dashboard extends Component {
                             </button>
                         </Drawer>
 
-                        <div className="statusUpdate">
+                        <div className={this.state.active === true ? "openStatusUpdate" : "closeStatusUpdate"}>
                             <h4>Update Your Status</h4>
                             <TextField 
                                 className="statusText" 
@@ -98,7 +98,7 @@ class Dashboard extends Component {
                             <RaisedButton label="Update" secondary={true} onClick={this.updateStatus.bind(this)}/>
                         </div>
 
-                        <div className="listPosts">
+                        <div className={this.state.active === true ? "openListPosts" : "closeListPosts"}>
                             <Posts userID={this.state.user_id}/>
                         </div>
 

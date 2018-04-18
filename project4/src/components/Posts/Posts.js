@@ -92,6 +92,7 @@ class Posts extends Component {
                         {this.state.posts.length === 0 ? <ListItem primaryText={<span>No Posts!</span>}/> : ''}
                         {this.state.posts.map((post, index) =>
                             <ListItem key={post.id}
+                                className="item"
                                 primaryText={<span>{post.post}</span>}
                                 leftIcon={<span>{index+1}.</span>}
                                 rightIconButton={
