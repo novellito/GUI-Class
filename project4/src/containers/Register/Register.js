@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 import DatePicker from "material-ui/DatePicker";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
@@ -21,6 +22,7 @@ class Register extends Component {
 
     return (
       <div className="page">
+        <Link to="/"><RaisedButton className="land-btns" label="Home" primary={true}/></Link>
         <Card className="main-container">
           <CardHeader title="Sign Up" avatar={Facebook} />
           <form>
