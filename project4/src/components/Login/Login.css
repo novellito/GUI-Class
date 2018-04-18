@@ -13,8 +13,10 @@
 
 .LoginLogoImageCenter{
     margin-top:10px;
-    margin-left:350px;
+    margin-left:380px;
     border-radius: 50%;
+    height: 175px;
+    width: 175px;
   }
 
   .Login-Title{
