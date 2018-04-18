@@ -11,7 +11,8 @@ class FriendPreview extends Component {
     state = {
         open: true,
         lookupInfo:'',
-        previewFriendsList:''
+        previewFriendsList:'',
+        previewPosts: ''
       };
     
       handleOpen = () => {
@@ -34,7 +35,11 @@ class FriendPreview extends Component {
         fetch(`/friendsList/${this.props.lookUpID}`)
             .then(res => res.json())
             .then(previewFriendsList => this.setState({ previewFriendsList }, () => console.log("Friends received..", previewFriendsList)));
-      }
+
+        fetch(`/posts/${this.props.lookUpID}`)
+        .then(res => res.json())
+        .then(previewPosts => this.setState({ previewPosts }, () => console.log("Posts received..", previewPosts)));
+    }
     
     
     render() {
@@ -74,7 +79,19 @@ class FriendPreview extends Component {
                                 primaryText={<span>{friend.fname} {friend.lname}</span>}
                                 />
                             )}
-                        </List>:''}
+                        </List>:''
+                    }
+                    <Divider/>
+                    {this.state.previewPosts!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_friends!=='false'?
+                        <List>
+                            <Subheader style={{paddingLeft:'0px', fontSize:'1.3em'}}>Posts</Subheader>
+                            {this.state.previewPosts.map(post =>
+                            <ListItem innerDivStyle={{padding:'5px 16px'}} key={post.id}
+                                primaryText={<span>{post.post}</span>}
+                                />
+                            )}
+                        </List>:''
+                    }
                 </Dialog>
             </div>
         );
