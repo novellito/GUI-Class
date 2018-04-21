@@ -8,7 +8,7 @@
 }
 
 .main-container {
-  padding: 20px 40px;
+  padding: 10px 20px;
 }
 
 .submit-button {
@@ -17,4 +17,8 @@
 
 .home-button {
   float: left;
+}
+
+input#dob {
+  top:7px;
 }

@@ -119,7 +119,7 @@ class Register extends Component {
         break;
       case "email":
         emailValid = value.match(
-          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
         );
         fieldValidationErrors.email = emailValid ? "" : "Invalid Email";
         break;
@@ -166,7 +166,30 @@ class Register extends Component {
       redirect = <Redirect to={"/dashboard/" + this.state.userId} />;
 
     const style = {
-      margin: 12
+      button: {
+        margin: 12
+      },
+      textField: {
+        height: 24
+      },
+      errorStyle: {
+        height: 10
+      },
+      hintStyle: {
+        top: 0
+      },
+      underlineStyle: {
+        bottom: 2
+      },
+      datepicker: {
+        lineHeight: 0.4,
+        marginTop: -15,
+        marginBottom: -10,
+        top: 7
+      },
+      dialogContainerStyle: {
+        height: 50
+      }
     };
 
     return (
@@ -175,6 +198,10 @@ class Register extends Component {
           <CardHeader title="Sign Up" avatar={Facebook} />
           <form onSubmit={this.handleForm}>
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="firstName"
               hintText="First Name"
               errorText={this.state.formErrors.firstName}
@@ -182,6 +209,10 @@ class Register extends Component {
             />
             <br />
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="lastName"
               hintText="Last Name"
               errorText={this.state.formErrors.lastName}
@@ -189,6 +220,10 @@ class Register extends Component {
             />
             <br />
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="age"
               hintText="Age"
               errorText={this.state.formErrors.age}
@@ -196,13 +231,20 @@ class Register extends Component {
             />
             <br />
             <DatePicker
+              dialogContainerStyle={style.dialogContainerStyle}
+              textFieldStyle={style.datepicker}
               name="dob"
+              id="dob"
               onChange={this.handleDate}
               hintText="Date Of Birth"
               openToYearSelection={true}
             />
             <br />
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="userName"
               hintText="Username"
               errorText={this.state.formErrors.userName}
@@ -210,6 +252,10 @@ class Register extends Component {
             />
             <br />
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="email"
               hintText="Email"
               errorText={this.state.formErrors.email}
@@ -217,6 +263,10 @@ class Register extends Component {
             />
             <br />
             <TextField
+              hintStyle={style.hintStyle}
+              style={style.textField}
+              errorStyle={style.errorStyle}
+              underlineStyle={style.underlineStyle}
               name="password"
               hintText="Password"
               type="password"
@@ -229,7 +279,7 @@ class Register extends Component {
                 className="home-button"
                 label="Home"
                 disabled={false}
-                style={style}
+                style={style.button}
                 primary={true}
               />
             </Link>
@@ -238,7 +288,7 @@ class Register extends Component {
               className="submit-button"
               label="Sign Up"
               disabled={!this.state.formValid}
-              style={style}
+              style={style.button}
             />
           </form>
         </Card>
