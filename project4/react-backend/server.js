@@ -77,6 +77,18 @@ app.get("/userInfo/:userId", function(req, res) {
   });
 });
 
+// update the user's date of birth
+app.post('/updateDOB/:userId', function(req, res) {
+  let userID = req.params.userId;
+  let dob = JSON.stringify(req.body.dob);
+
+  let updateDOBQuery = `UPDATE users SET DOB=${dob} WHERE id=${userID}`;
+  connection.query(updateDOBQuery, function(error, results, fields) {
+      if(error) throw error;
+      res.json(dob);
+  });
+});
+
 // updates the user's status
 app.post("/updateStatus/:userId", function(req, res) {
   let userID = req.params.userId;

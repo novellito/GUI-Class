@@ -125,6 +125,14 @@ class Dashboard extends Component {
     }
   }
 
+  updateDOB() {
+    fetch(`/userInfo/${this.props.match.params.id}`)
+    .then(res => res.json())
+    .then(userInfo => {
+        this.setState({ userInfo }, () => console.log("user info...", userInfo[0]))}
+    );
+  }
+
   render() {
     let name = null;
     let age = null;
@@ -153,9 +161,11 @@ class Dashboard extends Component {
                 )}
               </div>
               <Setting
+                userID={this.state.user_id}
                 style={{ backgroundColor: '#e9ebee' }}
                 friends={this.state.friendsActive}
                 dob={this.state.dobActive}
+                updateDOB={this.updateDOB.bind(this)}
                 posts={this.state.postsActive}
                 status={this.state.statusActive}
                 togglePosts={this.togglePosts}
