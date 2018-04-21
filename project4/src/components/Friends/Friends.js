@@ -60,7 +60,15 @@ class Friends extends Component {
 
   // Visually adds a friend to the user's friends list
   addToList = f => {
-    this.setState({ friend: this.state.friends.push(f) });
+    this.setState({ friend: this.state.friends.push(f) }, () => {
+      fetch(`/friendsList/${this.props.userID}`)
+        .then(res => res.json())
+        .then(friends =>
+          this.setState({ friends }, () =>
+            console.log('Friends received..', friends)
+          )
+        );
+    });
   };
 
   //Method to store the information of the user being previewed
