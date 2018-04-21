@@ -16,3 +16,39 @@
     font-size: 20px;
     margin: 0;
 }
+
+.status {
+    font-size: 20px;
+    margin: 0;
+}
+
+.closeStatusUpdate {
+    position: absolute;
+    margin-top: 50px;
+    left: 40%;
+}
+
+.openStatusUpdate {
+    position: absolute;
+    margin-top: 50px;
+    left: 30%;
+}
+
+.statusText {
+    margin-right: 20px;
+}
+
+.closeListPosts {
+    position: absolute;
+    margin-top: 300px;
+    left: 40%;
+}
+
+.openListPosts {
+    position: absolute;
+    margin-top: 300px;
+    left: 30%;
+}
+#userDrawer {
+    position:relative;
+}

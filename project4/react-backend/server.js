@@ -71,12 +71,24 @@ app.get('/friendsList/:userId', function(req, res) {
 // returns the users information
 app.get('/userInfo/:userId', function(req, res) {
     let userID = req.params.userId;
-    let friendQuery = `SELECT fname,lname,DOB,age,username,toggle_status,toggle_posts,toggle_friends,toggle_dob FROM users WHERE id=${userID}` ;
+    let friendQuery = `SELECT fname,lname,DOB,status,age,username,toggle_status,toggle_posts,toggle_friends,toggle_dob FROM users WHERE id=${userID}` ;
 
     connection.query(friendQuery, function(error, results, fields) {
         if (error) throw error;
     //    console.log(results)
         res.json(results); 
+    });
+});
+
+// updates the user's status
+app.post('/updateStatus/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let status = JSON.stringify(req.body.status);
+
+    let updateStatusQuery = `UPDATE users SET status=${status} WHERE id=${userID}`;
+    connection.query(updateStatusQuery, function(error, results, fields) {
+        if(error) throw error;
+        res.json(status);
     });
 });
 
@@ -115,6 +127,105 @@ app.post('/deleteAFriend/:userId', function(req, res) {
           friends.push(results[friend]);
         }
         res.json(friends); 
+    });
+    
+});
+
+// Get Posts Listing
+app.get('/posts/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let getPostsQuery = `SELECT * FROM posts WHERE user_id=${userID}`;
+
+    let posts = [];
+    connection.query(getPostsQuery, function(error, results, fields) {
+        if (error) throw error;
+        for(post in results) {
+            posts.push(results[post]);
+        }
+        res.json(posts);
+    });
+});
+
+// Add a Post
+app.post('/addPost/:userId', function(req, res) {
+    let userID = req.params.userId;
+    let post = JSON.stringify(req.body.post);
+    
+    let addPostQuery = `INSERT INTO posts (user_id, post) VALUES (${userID}, ${post})`;
+    
+    let posts = [];
+    connection.query(addPostQuery, function(error, results, fields) {
+        if(error) throw error;
+        for(post in results) {
+            posts.push(results[post]);
+        }
+        res.json(posts);
+    });
+});
+
+// Delete a Post
+app.post('/deletePost/:postId', function(req, res) {
+
+    console.log(req.body)
+
+    let postID = req.body.p_id;
+
+    let friendQuery = `DELETE FROM posts WHERE id= ${postID}`;
+
+    let posts = [];
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        for(post in posts) {
+          posts.push(results[post]);
+        }
+        res.json(posts); 
+
+    })});
+// toggle friends list
+app.put('/toggleFriendPreview/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_friends=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle posts
+app.put('/togglePosts/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_posts=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle status
+app.put('/status/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_status=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
+    });
+    
+});
+// toggle DOB
+app.put('/dob/:userId', function(req, res) {
+
+    let userID = req.params.userId;
+
+    let friendQuery = `UPDATE users SET toggle_dob=${req.body.status} WHERE id = ${userID}`;
+    connection.query(friendQuery, function(error, results, fields) {
+        if (error) throw error;
+        res.json({msg:'success'}); 
     });
     
 });
