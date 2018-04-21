@@ -1,54 +1,59 @@
 .face {
-    margin-top: 20px;
-    font-size: 8em;
+  margin-top: 20px;
+  font-size: 8em;
 }
 
 .user-details {
-    text-align: center;
+  text-align: center;
+  background-color: #e1f5fe;
+  height: 100%;
 }
 
 .username {
-    font-size: 30px;
-    margin: 0;
+  font-size: 30px;
+  margin: 0;
 }
 
 .age {
-    font-size: 20px;
-    margin: 0;
+  font-size: 20px;
+  margin: 0;
 }
 
 .status {
-    font-size: 20px;
-    margin: 0;
+  font-size: 20px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .closeStatusUpdate {
-    position: absolute;
-    margin-top: 50px;
-    left: 40%;
+  position: absolute;
+  margin-top: 50px;
+  left: 40%;
 }
 
 .openStatusUpdate {
-    position: absolute;
-    margin-top: 50px;
-    left: 30%;
+  position: absolute;
+  margin-top: 50px;
+  left: 30.6%;
 }
 
 .statusText {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .closeListPosts {
-    position: absolute;
-    margin-top: 300px;
-    left: 40%;
+  position: absolute;
+  margin-top: 300px;
+  left: 40%;
 }
 
 .openListPosts {
-    position: absolute;
-    margin-top: 300px;
-    left: 30%;
+  position: absolute;
+  margin-top: 300px;
+  left: 30.6%;
 }
 #userDrawer {
-    position:relative;
+  position: relative;
 }
