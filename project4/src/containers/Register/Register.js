@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DatePicker from "material-ui/DatePicker";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
@@ -15,6 +15,7 @@ class Register extends Component {
       age: "",
       dob: "",
       userName: "",
+      email: "",
       password: "",
       formErrors: {
         firstName: "Required Field",
@@ -22,6 +23,7 @@ class Register extends Component {
         age: "Required Field",
         dob: "",
         userName: "Required Field",
+        email: "Required Field",
         password: "Required Field"
       },
       fnValid: false,
@@ -29,12 +31,34 @@ class Register extends Component {
       ageValid: false,
       dobValid: false,
       unValid: false,
+      emailValid: false,
       passwordValid: false,
-      formValid: false
+      formValid: false,
+      userId: "",
+      validRegister: false
     };
   }
   handleForm = e => {
-    console.log("Sign Up Hit");
+    let data = {
+      fname: this.state.firstName,
+      lname: this.state.lastName,
+      age: this.state.age,
+      DOB: this.state.dob,
+      username: this.state.userName,
+      password: this.state.password,
+      email: this.state.email
+    };
+    fetch(`/addUser`, {
+      method: "POST",
+      headers: new Headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ userId: res.insertId, validRegister: true }, () => {
+          console.log(this.state.userId);
+        });
+      });
     e.preventDefault();
   };
 
@@ -69,6 +93,7 @@ class Register extends Component {
     let ageValid = this.state.ageValid;
     let dobValid = this.state.dobValid;
     let unValid = this.state.unValid;
+    let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
 
     switch (fieldName) {
@@ -92,6 +117,12 @@ class Register extends Component {
         unValid = value.match(/^[a-z0-9]{2,10}$/i);
         fieldValidationErrors.userName = unValid ? "" : "Invalid Username";
         break;
+      case "email":
+        emailValid = value.match(
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
+        );
+        fieldValidationErrors.email = emailValid ? "" : "Invalid Email";
+        break;
       case "password":
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid
@@ -109,6 +140,7 @@ class Register extends Component {
         ageValid: ageValid,
         dobValid: dobValid,
         unValid: unValid,
+        emailValid: emailValid,
         passwordValid: passwordValid
       },
       this.validateForm
@@ -123,11 +155,16 @@ class Register extends Component {
         this.state.ageValid &&
         this.state.dobValid &&
         this.state.unValid &&
+        this.state.emailValid &&
         this.state.passwordValid
     });
   }
 
   render() {
+    var redirect = null;
+    if (this.state.validRegister)
+      redirect = <Redirect to={"/dashboard/" + this.state.userId} />;
+
     const style = {
       margin: 12
     };
@@ -173,6 +210,13 @@ class Register extends Component {
             />
             <br />
             <TextField
+              name="email"
+              hintText="Email"
+              errorText={this.state.formErrors.email}
+              onChange={event => this.handleUserInput(event)}
+            />
+            <br />
+            <TextField
               name="password"
               hintText="Password"
               type="password"
@@ -198,6 +242,7 @@ class Register extends Component {
             />
           </form>
         </Card>
+        {redirect}
       </div>
     );
   }
