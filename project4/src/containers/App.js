@@ -5,6 +5,7 @@ import Register from './Register/Register';
 import Dashboard from './Dashboard/Dashboard';
 import Landing from '../components/Landing/Landing';
 import Login from '../components/Login/Login';
+import LoginForm from '../components/Login/LoginForm';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/LoginForm" component={LoginForm}/>
           <Route exact path="/register" component={Register}/>
           <Route path="/dashboard/:id" component={Dashboard}/>
         </Switch>
