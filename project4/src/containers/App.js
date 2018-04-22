@@ -8,7 +8,6 @@ import Login from '../components/Login/Login';
 import LoginForm from '../components/Login/LoginForm';
 
 class App extends Component {
-
   render() {
     return (
       <div>

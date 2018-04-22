@@ -43,7 +43,7 @@ CREATE TABLE users (
  fname varchar(256) NOT NULL DEFAULT '',
  lname varchar(256) NOT NULL,
  age int(11) NOT NULL,
- DOB date NOT NULL,
+ DOB varchar(256) NOT NULL,
  status varchar(256) DEFAULT NULL,
  username char(10) NOT NULL,
  toggle_status char(10) DEFAULT 'true',
