@@ -51,7 +51,7 @@ class Login extends Component {
         return (
 
            
-            <div>
+            <div id="LoginForm">
                 <img src={logo} alt="facebook icon" className="LoginLogoImageCenter"/>
                 <p className = "Login-Title">FaceBookLite</p>
     

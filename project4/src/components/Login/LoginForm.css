@@ -7,14 +7,20 @@
 }
 
 .LoginLogoImageCenter{
-    margin-top:10px;
-    margin-left:380px;
     border-radius: 50%;
     height: 175px;
     width: 175px;
   }
 
   .Login-Title{
-      margin-left:385px;
       font-size:3vw;
+  }
+
+  #LoginForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: -webkit-linear-gradient(45deg, #2196F5, #8373f3 90%);
   }
