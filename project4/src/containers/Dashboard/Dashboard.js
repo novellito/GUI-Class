@@ -152,7 +152,7 @@ class Dashboard extends Component {
               <div className="user-details">
                 <i className="material-icons face">face</i>
                 <p className="username">{name}</p>
-                {this.state.dobActive ? <p className="dob">{dob}</p> : ''}
+                {this.state.dobActive ? <p className="dob">DOB: {dob}</p> : ''}
                 <p className="age">Age: {age}</p>
                 {this.state.statusActive ? (
                   <p className="status">Status: {status}</p>

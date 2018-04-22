@@ -46,26 +46,26 @@ class Setting extends Component {
                 height: 60,
             },
             large: {
-                width: 120,
-                height: 120,
-                padding: 30,
-              }
+                width: 100,
+                height: 100,
+                padding: 30
+            },
+            dobButton: {
+                width: 20,
+                height: 20
+            }
         }
         return (
            
             <div className="settingsSection">
                 {!this.state.showSettings ? '':
-                <div>
-                    <div className="updateDOB">
-                        <DatePicker hintText="Update DOB" textFieldStyle={{width: '135px'}} ref="updatedob" />
-                        <RaisedButton label="Update" secondary={true} onClick={this.updateDOB.bind(this)} />
-                    </div>
-                    <div className="toggles">
-                        <Toggle onToggle={this.props.toggleFriends} style={styles.toggle} toggled={this.props.friends?true:false} label="Show Friends"/>
-                        <Toggle onToggle={this.props.togglePosts} toggled={this.props.posts?true:false}  style={styles.toggle} label="Show Posts" defaultToggled={true}/>
-                        <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
-                        <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
-                    </div>
+                <div className="toggles">
+                    <Toggle onToggle={this.props.toggleFriends} style={styles.toggle} toggled={this.props.friends?true:false} label="Show Friends"/>
+                    <Toggle onToggle={this.props.togglePosts} toggled={this.props.posts?true:false}  style={styles.toggle} label="Show Posts" defaultToggled={true}/>
+                    <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
+                    <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
+                    <DatePicker hintText="Update DOB" style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" />
+                    <RaisedButton label="Update" secondary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                 </div>
                 }
                 <div className="settingsWrapper">

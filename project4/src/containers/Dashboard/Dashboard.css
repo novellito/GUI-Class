@@ -7,6 +7,8 @@
   text-align: center;
   background-color: #e1f5fe;
   height: 100%;
+  margin-top: -15px;
+  line-height: 1.5rem;
 }
 
 .username {
