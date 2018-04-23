@@ -50,7 +50,7 @@ class FriendPreview extends Component {
         let username = null;
         if(this.state.lookupInfo!=='') {
              name = this.state.lookupInfo[0].fname + " " + this.state.lookupInfo[0].lname ;
-             age = this.state.lookupInfo[0].age;
+             age = "Age: " + this.state.lookupInfo[0].age;
              username = this.state.lookupInfo[0].username;
             }
         if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_dob === '1') {
@@ -82,7 +82,7 @@ class FriendPreview extends Component {
                         </List>:''
                     }
                     <Divider/>
-                    {this.state.previewPosts!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_friends!=='false'?
+                    {this.state.previewPosts!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_posts!=='0'?
                         <List>
                             <Subheader style={{paddingLeft:'0px', fontSize:'1.3em'}}>Posts</Subheader>
                             {this.state.previewPosts.map(post =>

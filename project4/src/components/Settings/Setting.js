@@ -18,19 +18,24 @@ class Setting extends Component {
 
     updateDOB(dob) {
         dob.preventDefault();
-        let userID = this.props.userID;
+        let newDOB = this.refs.updatedob.refs.input.props.value;
+        if(newDOB !== "") {
+            let userID = this.props.userID;
 
-        let d = {
-            dob: this.refs.updatedob.refs.input.props.value
-        };
-        
-        fetch(`/updateDOB/${userID}`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify(d)
-        }).then(res => res.json()).then(res => this.props.updateDOB(res))
+            let d = {
+                dob: newDOB
+            };
+            
+            fetch(`/updateDOB/${userID}`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(d)
+            }).then(res => res.json()).then(res => this.props.updateDOB(res))
 
-        // this.refs.updatedob.refs.input.props.value = "";
+            // this.refs.updatedob.refs.input.getInputNode().value = "";
+
+        }
+
     }
 
     render() {
@@ -65,11 +70,11 @@ class Setting extends Component {
                     <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
                     <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
                     <DatePicker hintText="Update DOB" style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" />
-                    <RaisedButton label="Update" secondary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
+                    <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                 </div>
                 }
                 <div className="settingsWrapper">
-                    <IconButton onClick={this.toggleSettings} iconStyle={styles.largeIcon} style={styles.large} className="gearIcon">
+                    <IconButton onClick={this.toggleSettings} iconStyle={styles.largeIcon} style={styles.large} className="gearIcon" disableTouchRipple={true} >
                         <Settings />
                     </IconButton>
                 </div>
