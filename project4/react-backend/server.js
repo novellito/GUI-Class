@@ -89,6 +89,19 @@ app.post('/updateDOB/:userId', function(req, res) {
   });
 });
 
+app.get('/login/:userName/:password', function(req, res) {
+    let userName = JSON.stringify(req.params.userName);
+    let password = JSON.stringify(req.params.password);
+    console.log(userName);
+    console.log(password);
+    let accountQuery = `SELECT id FROM users WHERE username=${userName} AND password=${password}`;
+
+     connection.query(accountQuery, function(error, results, fields) {
+         if (error) throw error;
+         res.json(results); 
+    });
+});
+
 // updates the user's status
 app.post("/updateStatus/:userId", function(req, res) {
   let userID = req.params.userId;

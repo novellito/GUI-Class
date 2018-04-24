@@ -1,0 +1,36 @@
+
+
+.Login-Field{
+    padding-right:62px;
+}
+
+.LoginLogoImageCenter{
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+  }
+
+  .Login-Title{
+      font-size:3vw;
+  }
+
+  #LoginForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: -webkit-linear-gradient(45deg, #2196F5, #8373f3 90%);
+  }
+
+  .LandingButtons{
+      margin: 0px 15px;
+  }
+
+  #UsernameTitle{
+      font-size: 2vw;
+  }
+
+  #PasswordTitle{
+      font-size:2vw;
+  }

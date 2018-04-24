@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Setting.css'
+import {Redirect} from 'react-router-dom';
 import Settings from 'material-ui/svg-icons/action/settings';
 import IconButton from 'material-ui/IconButton';
 import Toggle from 'material-ui/Toggle';
@@ -10,6 +11,7 @@ class Setting extends Component {
 
     state = {
         showSettings:false,
+        out:false,
         dobError: "",
         value: ""
     }
@@ -18,6 +20,10 @@ class Setting extends Component {
         this.setState({showSettings:!this.state.showSettings})
     }
 
+    logout = () =>{
+        this.setState({out:true});
+    }
+    
     updateDOB(dob) {
         dob.preventDefault();
         let newDOB = this.refs.updatedob.refs.input.props.value;
@@ -52,6 +58,7 @@ class Setting extends Component {
     }
 
     render() {
+        var redirect = null;
         const styles = {
             block: {
                 maxWidth: 100
@@ -73,6 +80,10 @@ class Setting extends Component {
                 height: 20
             }
         }
+
+        if(this.state.out == true){
+            redirect = <Redirect to={"/"}></Redirect>;
+        }
         return (
            
             <div className="settingsSection">
@@ -82,7 +93,13 @@ class Setting extends Component {
                     <Toggle onToggle={this.props.togglePosts} toggled={this.props.posts?true:false}  style={styles.toggle} label="Show Posts" defaultToggled={true}/>
                     <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
                     <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
+<<<<<<< HEAD
                     <DatePicker hintText="Update DOB" value={this.state.value} errorText={this.state.dobError} style={{margin: "0"}} textFieldStyle={{width: '135px'}} ref="updatedob" onClick={this.handleError.bind(this)} onChange={this.handleDatechange.bind(this)} />
+=======
+                    <RaisedButton label="Logout" onClick={this.logout} id="LogoutButton" backgroundColor="#FF1744"/>
+                    {redirect}
+                    <DatePicker hintText="Update DOB" value={this.state.value} errorText={this.state.dobError} style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" onClick={this.handleError.bind(this)} onChange={this.handleDatechange.bind(this)} />
+>>>>>>> 2192451edb0265297ee5171baf05229af7a375fa
                     <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                 </div>
                 }
