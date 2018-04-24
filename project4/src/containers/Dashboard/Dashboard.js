@@ -150,7 +150,7 @@ class Dashboard extends Component {
           <div className="pane-group">
             <Drawer className="pane-mini sidebar" open={true}>
               <div className="user-details">
-                <i className="material-icons face">face</i>
+                <i className="material-icons face" id="face-icon">face</i>
                 <p className="username">{name}</p>
                 {this.state.dobActive ? <p className="dob">DOB: {dob}</p> : ''}
                 <p className="age">Age: {age}</p>

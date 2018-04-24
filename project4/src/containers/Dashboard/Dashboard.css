@@ -1,5 +1,5 @@
-.face {
-  margin-top: 20px;
+#face-icon {
+  margin-top: 3px;
   font-size: 8em;
 }
 
@@ -7,7 +7,6 @@
   text-align: center;
   background-color: #e1f5fe;
   height: 100%;
-  margin-top: -15px;
   line-height: 1.5rem;
 }
 

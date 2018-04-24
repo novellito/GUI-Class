@@ -12,6 +12,8 @@ class Setting extends Component {
     state = {
         showSettings:false,
         out:false,
+        dobError: "",
+        value: ""
     }
 
     toggleSettings = () => {
@@ -24,19 +26,35 @@ class Setting extends Component {
     
     updateDOB(dob) {
         dob.preventDefault();
-        let userID = this.props.userID;
+        let newDOB = this.refs.updatedob.refs.input.props.value;
+        if(newDOB === "") {
+            this.setState({dobError: "Date must be selected"});
+        }
+        else {
+            let userID = this.props.userID;
 
-        let d = {
-            dob: this.refs.updatedob.refs.input.props.value
-        };
-        
-        fetch(`/updateDOB/${userID}`, {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify(d)
-        }).then(res => res.json()).then(res => this.props.updateDOB(res))
+            let d = {
+                dob: newDOB
+            };
+            
+            fetch(`/updateDOB/${userID}`, {
+                method: 'POST',
+                headers: new Headers({ 'Content-Type': 'application/json' }),
+                body: JSON.stringify(d)
+            }).then(res => res.json()).then(res => this.props.updateDOB(res))
 
-        // this.refs.updatedob.refs.input.props.value = "";
+            // this.refs.updatedob.refs.input.getInputNode().value = "";
+            this.setState({value: ""});
+
+        }
+    }
+
+    handleError() {
+        this.setState({dobError: ""});
+    }
+
+    handleDatechange(event,date){
+        this.setState({value: date})
     }
 
     render() {
@@ -76,13 +94,13 @@ class Setting extends Component {
                     <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
                     <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
                     <RaisedButton label="Logout" onClick={this.logout} id="LogoutButton" backgroundColor="#FF1744"/>
-                    <DatePicker hintText="Update DOB" style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" />
-                    <RaisedButton label="Update" secondary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                     {redirect}
+                    <DatePicker hintText="Update DOB" value={this.state.value} errorText={this.state.dobError} style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" onClick={this.handleError.bind(this)} onChange={this.handleDatechange.bind(this)} />
+                    <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                 </div>
                 }
                 <div className="settingsWrapper">
-                    <IconButton onClick={this.toggleSettings} iconStyle={styles.largeIcon} style={styles.large} className="gearIcon">
+                    <IconButton onClick={this.toggleSettings} iconStyle={styles.largeIcon} style={styles.large} className="gearIcon" disableTouchRipple={true} >
                         <Settings />
                     </IconButton>
                 </div>
