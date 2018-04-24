@@ -48,6 +48,7 @@ class FriendPreview extends Component {
         let dob = null;
         let age = null;
         let username = null;
+        let status = null;
         if(this.state.lookupInfo!=='') {
              name = this.state.lookupInfo[0].fname + " " + this.state.lookupInfo[0].lname ;
              age = "Age: " + this.state.lookupInfo[0].age;
@@ -55,6 +56,9 @@ class FriendPreview extends Component {
             }
         if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_dob === '1') {
             dob = "DOB: " + this.state.lookupInfo[0].DOB;
+        }
+        if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_status === '1') {
+            status = "Status: " + this.state.lookupInfo[0].status;
         }
 
         return (
@@ -70,6 +74,7 @@ class FriendPreview extends Component {
                     <h3 className="username">{username}</h3>
                     <p>{age}</p>
                     <p>{dob}</p>
+                    <p>{status}</p>
                     <Divider/>
                     {this.state.previewFriendsList!=='' && this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_friends!=='0'?
                         <List>

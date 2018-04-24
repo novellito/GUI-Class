@@ -10,6 +10,7 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      connected:true,
       firstName: "",
       lastName: "",
       age: "",
@@ -53,11 +54,17 @@ class Register extends Component {
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(data)
     })
-      .then(res => res.json())
+      .then(res => res.json()).catch((e)=> {
+        console.log('error')
+      })
       .then(res => {
         this.setState({ userId: res.insertId, validRegister: true }, () => {
           console.log(this.state.userId);
         });
+      }).catch(()=> {
+        this.setState({connected:false});
+        console.log('error2')
+
       });
     e.preventDefault();
   };
@@ -162,6 +169,12 @@ class Register extends Component {
 
   render() {
     var redirect = null;
+    let connected = null;
+
+    if(!this.state.connected) {
+        connected =  <p style={{color:"red"}}>Currently not connected to database</p>;
+    }
+
     if (this.state.validRegister)
       redirect = <Redirect to={"/dashboard/" + this.state.userId} />;
 
@@ -196,6 +209,7 @@ class Register extends Component {
       <div className="page">
         <Card className="main-container">
           <CardHeader title="Sign Up" avatar={Facebook} />
+          {connected}
           <form onSubmit={this.handleForm}>
             <TextField
               hintStyle={style.hintStyle}
