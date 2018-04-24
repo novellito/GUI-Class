@@ -9,7 +9,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 class Setting extends Component {
 
     state = {
-        showSettings:false
+        showSettings:false,
+        dobError: ""
     }
 
     toggleSettings = () => {
@@ -19,7 +20,10 @@ class Setting extends Component {
     updateDOB(dob) {
         dob.preventDefault();
         let newDOB = this.refs.updatedob.refs.input.props.value;
-        if(newDOB !== "") {
+        if(newDOB === "") {
+            this.setState({dobError: "Date must be selected"});
+        }
+        else {
             let userID = this.props.userID;
 
             let d = {
@@ -35,7 +39,10 @@ class Setting extends Component {
             // this.refs.updatedob.refs.input.getInputNode().value = "";
 
         }
+    }
 
+    handleError() {
+        this.setState({dobError: ""});
     }
 
     render() {
@@ -69,7 +76,7 @@ class Setting extends Component {
                     <Toggle onToggle={this.props.togglePosts} toggled={this.props.posts?true:false}  style={styles.toggle} label="Show Posts" defaultToggled={true}/>
                     <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
                     <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
-                    <DatePicker hintText="Update DOB" style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" />
+                    <DatePicker hintText="Update DOB" errorText={this.state.dobError} style={{margin: 0}} textFieldStyle={{width: '135px'}} ref="updatedob" onClick={this.handleError.bind(this)}/>
                     <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
                 </div>
                 }
