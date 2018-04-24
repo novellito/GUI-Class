@@ -13,7 +13,7 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 910, height: 550, resizable:false});
+    mainWindow = new BrowserWindow({width: 910, height: 620, resizable:false});
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
