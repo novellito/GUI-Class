@@ -21,8 +21,6 @@ class Login extends Component {
         e.preventDefault();
         console.log(this.state.username);
         console.log(this.state.password);
-
-        ///fetch...
     }
 
     handleUsername = (username) => {
