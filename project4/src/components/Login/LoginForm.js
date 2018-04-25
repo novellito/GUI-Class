@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import "./LoginForm.css";
-import logo from "./facebook.png";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import { Card, CardHeader } from "material-ui/Card";
@@ -40,7 +39,8 @@ class Login extends Component {
     fetch(`/login/${this.state.username}/${this.state.password}`)
       .then(res => res.json())
       .then(res => {
-        this.checkValidLogin(res), console.log(this.state.userID);
+        this.checkValidLogin(res);
+        console.log(this.state.userID);
       });
   };
   checkValidLogin(res) {
@@ -52,7 +52,7 @@ class Login extends Component {
   }
   render(props) {
     var redirect = null;
-    if (this.state.validLogin == true) {
+    if (this.state.validLogin) {
       redirect = <Redirect to={"/dashboard/" + this.state.userID} />;
     }
     return (
