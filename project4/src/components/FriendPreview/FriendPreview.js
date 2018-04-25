@@ -58,7 +58,9 @@ class FriendPreview extends Component {
             dob = "DOB: " + this.state.lookupInfo[0].DOB;
         }
         if(this.state.lookupInfo!=='' && this.state.lookupInfo[0].toggle_status === '1') {
-            status = "Status: " + this.state.lookupInfo[0].status;
+            if(this.state.lookupInfo[0].status !== null) {
+                status = "Status: " + this.state.lookupInfo[0].status;
+            }
         }
 
         return (

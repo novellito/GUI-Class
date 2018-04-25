@@ -7,14 +7,18 @@
 }
 
 .toggles {
-    position:absolute;
-    bottom:20%;
-    left:22%;
-    width:135px;
+    position: absolute;
+    bottom: 20%;
+    left: 22%;
+    width: 135px;
 }
 
 .updateDOB {
     margin: 0 auto;
+}
+
+.LogoutButtonDiv{
+    margin-top: 15px;
 }
 
 
