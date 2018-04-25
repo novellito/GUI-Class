@@ -42,7 +42,13 @@ class Login extends Component {
       .then(res => {
         this.checkValidLogin(res);
       })
-      .catch(() => this.setState({ connected: false }));
+      .catch(() => {
+        if (this.state.username === "" || this.state.password === "") {
+          //
+        } else {
+          this.setState({ connected: false });
+        }
+      });
   };
   checkValidLogin(res) {
     try {
