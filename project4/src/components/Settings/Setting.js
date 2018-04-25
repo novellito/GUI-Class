@@ -1,85 +1,84 @@
-import React, {Component} from 'react';
-import './Setting.css'
-import {Redirect} from 'react-router-dom';
-import Settings from 'material-ui/svg-icons/action/settings';
-import IconButton from 'material-ui/IconButton';
-import Toggle from 'material-ui/Toggle';
-import DatePicker from 'material-ui/DatePicker';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from "react";
+import "./Setting.css";
+import { Redirect } from "react-router-dom";
+import Settings from "material-ui/svg-icons/action/settings";
+import IconButton from "material-ui/IconButton";
+import Toggle from "material-ui/Toggle";
+import DatePicker from "material-ui/DatePicker";
+import RaisedButton from "material-ui/RaisedButton";
 
 class Setting extends Component {
+  state = {
+    showSettings: false,
+    out: false,
+    dobError: "",
+    value: ""
+  };
 
-    state = {
-        showSettings:false,
-        out:false,
-        dobError: "",
-        value: ""
+  toggleSettings = () => {
+    this.setState({ showSettings: !this.state.showSettings });
+  };
+
+  logout = () => {
+    this.setState({ out: true });
+  };
+
+  updateDOB(dob) {
+    dob.preventDefault();
+    let newDOB = this.refs.updatedob.refs.input.props.value;
+    if (newDOB === "") {
+      this.setState({ dobError: "Date must be selected" });
+    } else {
+      let userID = this.props.userID;
+
+      let d = {
+        dob: newDOB
+      };
+
+      fetch(`/updateDOB/${userID}`, {
+        method: "POST",
+        headers: new Headers({ "Content-Type": "application/json" }),
+        body: JSON.stringify(d)
+      })
+        .then(res => res.json())
+        .then(res => this.props.updateDOB(res));
+
+      // this.refs.updatedob.refs.input.getInputNode().value = "";
+      this.setState({ value: "" });
     }
+  }
 
-    toggleSettings = () => {
-        this.setState({showSettings:!this.state.showSettings})
-    }
+  handleError() {
+    this.setState({ dobError: "" });
+  }
 
-    logout = () =>{
-        this.setState({out:true});
-    }
-    
-    updateDOB(dob) {
-        dob.preventDefault();
-        let newDOB = this.refs.updatedob.refs.input.props.value;
-        if(newDOB === "") {
-            this.setState({dobError: "Date must be selected"});
-        }
-        else {
-            let userID = this.props.userID;
+  handleDatechange(event, date) {
+    this.setState({ value: date });
+  }
 
-            let d = {
-                dob: newDOB
-            };
-            
-            fetch(`/updateDOB/${userID}`, {
-                method: 'POST',
-                headers: new Headers({ 'Content-Type': 'application/json' }),
-                body: JSON.stringify(d)
-            }).then(res => res.json()).then(res => this.props.updateDOB(res))
-
-            // this.refs.updatedob.refs.input.getInputNode().value = "";
-            this.setState({value: ""});
-
-        }
-    }
-
-    handleError() {
-        this.setState({dobError: ""});
-    }
-
-    handleDatechange(event,date){
-        this.setState({value: date})
-    }
-
-    render() {
-        var redirect = null;
-        const styles = {
-            block: {
-                maxWidth: 100
-            },
-            toggle: {
-                marginBottom: 0
-            },
-              largeIcon: {
-                width: 60,
-                height: 60,
-            },
-            large: {
-                width: 100,
-                height: 100,
-                padding: 30
-            },
-            dobButton: {
-                width: 20,
-                height: 20
-            }
-        }
+  render() {
+    var redirect = null;
+    const styles = {
+      block: {
+        maxWidth: 100
+      },
+      toggle: {
+        marginBottom: 0
+      },
+      largeIcon: {
+        width: 60,
+        height: 60
+      },
+      large: {
+        width: 100,
+        height: 100,
+        padding: 30
+      },
+      dobButton: {
+        width: 20,
+        height: 20
+      }
+    };
 
         if(this.state.out == true){
             redirect = <Redirect to={"/"}></Redirect>;
