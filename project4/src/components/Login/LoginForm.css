@@ -8,10 +8,13 @@
     border-radius: 50%;
     height: 175px;
     width: 175px;
+    margin-left: 40px;
+    margin-top: 5px;
   }
 
   .Login-Title{
       font-size:3vw;
+      margin-left: 40px;
   }
 
   #LoginForm{
@@ -33,4 +36,11 @@
 
   #PasswordTitle{
       font-size:2vw;
+  }
+  .main-container {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    background-color:white;
   }

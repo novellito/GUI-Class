@@ -94,10 +94,11 @@ class Setting extends Component {
                     <Toggle onToggle={this.props.toggleStatus} toggled={this.props.status?true:false} style={styles.toggle} label="Show Status"/>
                     <Toggle onToggle={this.props.toggleDOB} toggled={this.props.dob?true:false} style={styles.toggle} label="Show DOB"/>
                     <DatePicker hintText="Update DOB" value={this.state.value} errorText={this.state.dobError} style={{margin: "0"}} textFieldStyle={{width: '135px'}} ref="updatedob" onClick={this.handleError.bind(this)} onChange={this.handleDatechange.bind(this)} />
-                    <RaisedButton label="Logout" onClick={this.logout} id="LogoutButton" backgroundColor="#FF1744"/>
+                    <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
+                    <div className="LogoutButtonDiv"><RaisedButton label="Logout" onClick={this.logout} id="LogoutButton" secondary={true} style="margin-top:20px"/></div>
                     {redirect}
            
-                    <RaisedButton label="Update" primary={true} style={styles.dobButton} onClick={this.updateDOB.bind(this)} />
+                    
                 </div>
                 }
                 <div className="settingsWrapper">

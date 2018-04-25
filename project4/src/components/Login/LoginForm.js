@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect, Link} from "react-router-dom";
 import './LoginForm.css'
 import logo from './facebook.png';
+import {Card, CardHeader} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -29,6 +30,7 @@ class Login extends Component {
 
     handlePassword = (password) => {
         this.setState({password:password}, ()=> console.log(this.state.password))
+    
     }
 
     componentDidMount() {
@@ -51,6 +53,7 @@ class Login extends Component {
             this.setState({errorText:"Wrong Username/Password"});
         }
         
+        
 
     }
     render(props) {
@@ -58,11 +61,13 @@ class Login extends Component {
         if(this.state.validLogin == true){
             redirect = <Redirect to={"/dashboard/"+this.state.userID}></Redirect>;
         }
+        
         return (
 
            
             <div id="LoginForm">
-                <img src={logo} alt="facebook icon" className="LoginLogoImageCenter"/>
+            <Card className="main-container" >
+                <img src={logo} className = "LoginLogoImageCenter"/>
                 <p className = "Login-Title">FaceBookLite</p>
                 <TextField value={this.state.username} onChange={(e)=>this.handleUsername(e.target.value)} type="text" className = "Login-Field" name="username" floatingLabelText="Username" errorText={this.state.errorText}/>
                 <br/>
@@ -76,8 +81,8 @@ class Login extends Component {
                 </Link>
                 </div>
                 {redirect}
-                
-
+               
+            </Card>
             </div>
             
 
