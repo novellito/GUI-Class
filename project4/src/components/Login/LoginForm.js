@@ -8,6 +8,7 @@ import Facebook from "../../assets/facebook.png";
 
 class Login extends Component {
   state = {
+    connected: true,
     username: "",
     password: "",
     userID: "",
@@ -40,8 +41,8 @@ class Login extends Component {
       .then(res => res.json())
       .then(res => {
         this.checkValidLogin(res);
-        console.log(this.state.userID);
-      });
+      })
+      .catch(() => this.setState({ connected: false }));
   };
   checkValidLogin(res) {
     try {
@@ -52,6 +53,12 @@ class Login extends Component {
   }
   render(props) {
     var redirect = null;
+    let connected = null;
+    if (!this.state.connected) {
+      connected = (
+        <p style={{ color: "red" }}> Currently not connected to database</p>
+      );
+    }
     if (this.state.validLogin) {
       redirect = <Redirect to={"/dashboard/" + this.state.userID} />;
     }
@@ -59,6 +66,7 @@ class Login extends Component {
       <div id="LoginForm">
         <Card className="main-container">
           <CardHeader title="FaceBookLite" avatar={Facebook} />
+          {connected}
           <TextField
             value={this.state.username}
             onChange={e => this.handleUsername(e.target.value)}
