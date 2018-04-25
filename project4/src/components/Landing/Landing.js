@@ -8,12 +8,11 @@ const Landing = props => {
     <div id="landing">
       <h1>Welcome to FB Lite</h1>
       <div className="buttons">
+        <Link to="/register">
+          <RaisedButton className="land-btns" label="Register" primary={true} />
+        </Link>
         <Link to="/LoginForm">
           <RaisedButton className="land-btns" label="Login" />
-        </Link>
-  
-        <Link to="/register">
-          <RaisedButton  className="land-btns" label="Register" primary={true} />
         </Link>
       </div>
     </div>
