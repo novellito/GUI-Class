@@ -14,3 +14,4 @@ This repo contains projects for my GUI Class
 ![hangman](https://user-images.githubusercontent.com/21237266/38759298-0eccebfe-3f2a-11e8-932f-89343c260659.JPG)
 
 ## Project 4 - A Barebone Facebook clone made using Electron with React.js and MySQL
+![guiapp](https://user-images.githubusercontent.com/21237266/39226627-6de881de-4808-11e8-910c-05ab7918caca.JPG)
